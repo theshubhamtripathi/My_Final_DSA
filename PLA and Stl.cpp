@@ -255,6 +255,28 @@
 // sort mainly sort the things in a respective order sort(v.begin(),v.end()) this will sort in acending order to sort in decdnding order use sort(a, a+n, greater<int>); here a is the start index a+n is the ending index and for any dcedneodng we must use greater
 //max and min 
 
+// majority elemenet in an array
+// class Solution {
+// public:
+//     int majorityElement(vector<int>& nums) {
+//         int n = nums.size();
+//         for(int i=0;i<n;i++){
+//             int count = 0;
+//             for(int j=0;j<n;j++){
+//                 if(nums[i]==nums[j]){
+//                     count ++;
+//                 }
+//             }
+//             if(count > n/2){
+//                 return nums[i];
+//             }
+//         }
+//         return -1;
+//     }
+// };
+
+// binary palindrome
+
 
 
 
