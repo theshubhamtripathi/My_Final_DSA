@@ -76,6 +76,31 @@
 //   }
 
 //Euclidean GCD
+//GCD(a,b) = GCD(a-b,b)
+//we have to greater % smaller if one is zero then the other one is gcd 
+// int GCD_EUCLID(int a, int b) {
+//     while (a > 0 && b > 0) {
+//         if (a > b) {
+//             a = a % b;
+//         } else {
+//             b = b % a;
+//         }
+//     }
+    
+//     // After the loop, one of them will be 0
+//     if (a == 0) {
+//         return b;
+//     } else {
+//         return a;
+//     }
+// }
+// its time complexity is log(min(a,b))
+
+
+
+
+
+
 
 
 
