@@ -96,6 +96,66 @@
 // }
 // its time complexity is log(min(a,b))
 
+//Armsstrong number
+//here we used 2 major concepts one is it chnages and num to string to_string(num).lenght(); it will give the lenghth or total number of digits in those numbers
+//    return sum == num ? true : false;  ::  condition ? value_if_true : value_if_false   ? it is ternary operator which is mainly used for conditional things
+// #include<iostream>
+// bool ARMS(int n){
+//     int original = n;
+//     int k = to_string(n).length();
+//     int sum = 0;
+//     while(n>0){
+//         int ld = n%10;
+//         sum += pow(ld,k);
+//         n /= 10;
+//     }
+//      return sum == original ? true : false;
+// }
+
+//Print all Divisors of a given Number 
+//here the main logic is the anynumerber is divisible till its squareroot prime factors only means 36 will be divisible by all numbers and multiples which comes in 6
+// so we will take the loop to square root n tak 
+//we must use i*i instead of sqrt(i) because that one s more efficient 
+//#include<iostream>
+// #include<vector>
+// #include<cmath>
+// #include<algorithm>
+// using namespace std;
+// vector<int> divisor(int num){
+//     vector<int> result;
+//     for(int i=1;i*i<=num;i++){
+//         if(num%i == 0){
+//             result.push_back(i);
+        
+//             if(num/i != i){               //we are doing this thing beacsue suppose 36 is divisible by 6 then 36/6 = 6 then 6 will come for 2 times that is wrong we are inmeneting this logic to do n/2 = like for example 36/2 18 like that itna samajh le chutiye ab 
+//             result.push_back(num/i);
+//                 }
+//             }
+//     }
+//     sort(result.begin(),result.end());
+//     return result;
+// }
+// int main(){
+//     int n;
+//     cout<<"Enter the elemnt u want : ";
+//     cin>>n;
+//     vector<int> divisors = divisor(n);
+//     for(int i=0;i<divisors.size();i++){
+//         cout<<divisors[i]<<" ";
+//     }
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
