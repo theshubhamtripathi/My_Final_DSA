@@ -139,12 +139,40 @@
 //     int n;
 //     cout<<"Enter the elemnt u want : ";
 //     cin>>n;
-//     vector<int> divisors = divisor(n);
+//     vector<int> divisors = divisor(n);  //this line creates a variable to store the result returned by your divisor() function cause it is returning a vector only .
 //     for(int i=0;i<divisors.size();i++){
 //         cout<<divisors[i]<<" ";
 //     }
 //     return 0;
 // }
+
+//Prime
+//Prime here one thing we have ti make sure that take all the number to sqrt of n so we dont have to cover the entire till n length we also make this code by bool flag for that you have to use break statement as well 
+// #include<iostream>
+// using namespace std;
+// bool Prime(int n){
+//     if(n==0 || n==1) return false;
+//     if(n==2) return true;
+//     for(int i=2;i*i<=n;i++){
+//         if(n%i == 0){
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+// int main(){
+//     cout<<"Enter your number : ";
+//     int n;
+//     cin>>n;
+//     cout<<Prime(n);
+//     return 0;
+// }
+
+//Recursion 
+//
+
+
+
 
 
 
