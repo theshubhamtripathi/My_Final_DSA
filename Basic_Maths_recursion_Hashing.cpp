@@ -169,7 +169,133 @@
 // }
 
 //Recursion 
-//
+//it is a phenomenon when a function calls itself indefinitely until a specified condition is fulfilled.
+//But, when there is no base condition given for a particular recursive function, it gets called indefinitely which results in a Stack Overflow i.e, exceeding the memory limit of the recursion stack and hence the program terminates giving a Segmentation Fault error.
+//Printing number 0 to n 
+// int count = 0;
+// void func(){
+//    if(count == 3 ) return;
+//    print(count);
+//    count++;
+//    func();
+// }
+// main()
+// {
+//   print();
+// }
+
+//Printing names n time
+// #include<bits/stdc++.h>
+// using namespace std;
+// void func(int i, int n){
+//    // Base Condition.
+//    if(i>n) return;
+//    cout<<"Raj"<<endl;
+//    // Function call to print till i increments.
+//    func(i+1,n);
+// }
+// int main(){
+//   // Here, let’s take the value of n to be 4.
+//   int n = 4;
+//   func(1,n);
+//   return 0;
+// }
+
+//Printing numbrs from 1 to n
+// #include<bits/stdc++.h>
+// using namespace std;
+// void func(int i, int n){
+//    // Base Condition.
+//    if(i>n) return;  
+//    cout<<i<<endl;
+//    // Function call to print i till i increments to n.
+//    func(i+1,n);
+// }
+// int main(){
+//   // Here, let’s take the value of n to be 4.
+//   int n = 4;
+//   func(1,n);
+//   return 0;
+// }  
+
+//backtracking This is an alternative approach for printing the integers from N to 1 using recursion. In the previous approach, we used forward recursion but in this approach, we will be using backward recursion. The only change from the previous approach here will be that the print line would be kept after the function call inside the recursive function contrary to the previous approach. The function would be called for printing (i+1) integers and the ith integer would be printed.
+
+//Printing numbers from n to 1 
+// #include<bits/stdc++.h>
+// using namespace std;
+// void func(int i, int n){
+//    // Base Condition.
+//    if(i<1) return;
+//    cout<<i<<endl;
+//    // Function call to print i till i decrements to 1.
+//    func(i-1,n);
+// }
+
+//Sum of till n intergers 
+// #include<bits/stdc++.h>
+// using namespace std;
+// int func(int n){
+//    // Base Condition.
+//    if(n == 0)
+//    {
+//        return 0;
+//    }
+//    // Problem broken down into 2 parts and then combined.
+//    return n + func(n-1);
+// }
+
+//Factorial
+// #include <bits/stdc++.h>
+// using namespace std;
+// // Recursive function to calculate factorial of a number
+// int factorial(int n) {
+//     // Base case: factorial of 0 is 1
+//     if (n == 0) {
+//         return 1;
+//     }
+//     // Recursive case: n * factorial of (n-1)
+//     return n * factorial(n - 1);
+// }
+
+//Reverse a array 
+//First method using functions 
+// #include <algorithm>
+// #include <iostream>
+// using namespace std;
+
+// int main() {
+//     int arr[] = {1,2,3,4,5};
+//     int n = 5;
+//     reverse(arr, arr + n);
+//     for (int i = 0; i < n; i++) cout << arr[i] << " ";
+//     // Output: 5 4 3 2 1
+//     return 0;
+// }
+// Summary:
+// reverse(arr, arr + n); reverses the entire array arr of size n.
+// Works for vectors too: reverse(v.begin(), v.end());
+
+//jab bhi void use karo function ke undar hi cout kardo and main ke andar direct function call 
+
+//2nd method by swapping 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
