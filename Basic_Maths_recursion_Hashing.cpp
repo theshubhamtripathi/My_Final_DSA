@@ -278,6 +278,34 @@
 //jab bhi void use karo function ke undar hi cout kardo and main ke andar direct function call 
 
 //2nd method by swapping 
+// #include<iostream>
+// #include<algorithm>
+// using namespace std;
+// void Reverse(int arr[],int n){
+//     for(int i=0;i<n;i++){
+//         cout<<arr[i]<<" ";
+//     }
+//     int p1 = 0;   //first index
+//     int pn = n-1; //last index 
+//     while(p1<pn){
+//         swap(arr[p1],arr[pn]);
+//         p1++;
+//         pn--;
+//     }
+//      for(int i=0;i<n;i++){
+//         cout<<arr[i]<<" ";
+//     }
+// }
+// int main(){
+//     int n = 5;
+//     int arr[] = {1,2,3,4,5};
+//     Reverse(arr,n);
+//     return 0;
+// }
+
+//Check wheteher a string is palindrome or not 
+
+
 
 
 
