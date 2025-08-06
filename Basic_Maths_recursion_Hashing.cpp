@@ -304,7 +304,69 @@
 // }
 
 //Check wheteher a string is palindrome or not 
+//#include<iostream>
+// using namespace std ;
+// bool STPALIN(string &s){
+//     int n = s.size();
+//     int p1 = 0;
+//     int p2 = n-1;
+//     while(p1<p2){
+//         if(s[p1]==s[p2]){
+//             p1++;
+//             p2--;
+//         }
+//         else{
+//             return false;
+//         }
+//         return true;
+//     }
+// }
+// int main(){
+//     string s = "MADAM";
+//     cout<<STPALIN(s);
+//     return 0;
+// }
 
+//Typical use case: When processing strings where you want to ignore non-alphanumeric characters (e.g., spaces, punctuation) — for example, in questions like "is a string a palindrome, ignoring punctuation/spaces?"
+//we use isalnum whenever we have to ignore anything except num and alphabet 
+
+
+//Fibonacci
+// #include<iostream>
+// using namespace std;
+// void fibonacci(int n){
+//     if(n>=0){
+//         cout<<0<<" ";
+//     }
+//     if(n>=1){
+//         cout<<1<<" ";
+//     }
+//     int secoundlast = 0;
+//     int last = 1;
+//     int curr;
+//     for(int i=2;i<=n;i++){
+//         curr = secoundlast+last;
+//         secoundlast = last;
+//         last = curr;
+//         cout<<curr<<" ";
+//     }
+// }
+// int main(){
+//     fibonacci(5);
+//     return 0;
+// }
+//Recurision
+// class Solution {
+// public:
+//     int fib(int n) {
+//         //it is basically sum of n-1 + n-2 we will use recursion here 
+//         //for recursion we must write a base condition that shows till where the fuction calling will happer 
+//         if(n<=1){
+//             return n; //we are doing here n because it have to return 2 values that 0 or 1 if we do return 1 in place of return 0 then we chnage the dififnition that why we keep n here 
+//         }
+//         return fib(n-1)+fib(n-2);
+//     }
+// };
 
 
 
