@@ -441,7 +441,75 @@
 //     return 0;
 // }
 
-//
+//to go beyond these constraints we have have to use map of 10^6 and 10^7
+//maps we have to give 2 parameters key and value where key represnets the numbers and value represents the frequency 
+//map stores all the value in the sorted order and map represnetation is like map<int,int> mp and also make sure where the first int says abput the number and the 2nd one shows frequency
+
+//MAP
+// #include<iostream>
+// #include<map>
+// using namespace std;
+// int main(){
+//     int n;
+//     cin>>n;
+//     int arr[n];
+//     for(int i=0;i<n;i++){
+//         cin>>arr[i];
+//     }
+//     //precompute
+//     map<int,int> mp;
+//     for(int i=0;i<n;i++){
+//         mp[arr[i]]++;  //incrementing the frequency 
+//     }
+//iterate in map
+// for(auto it : mp){
+//     cout<<it.first<<"->"<<it.second<<endl;
+//     int q;
+//     cin>>q;
+//     while(q--){
+//         int num;
+//         cin>>num;
+//         //fetch
+//         cout<<mp[num]<<endl;
+//     }
+//     return 0;
+// } 
+
+//in the map if we store a string then it will store it as string not as as int 
+
+// #include<iostream>
+// #include<map>
+// using namespace std;
+// int main() {
+//     string s;
+//     cin >> s;
+//     int n = s.size();
+
+//     map<char, int> mp;
+//     for (int i = 0; i < n; i++) {
+//         mp[s[i]]++;
+//     }
+
+//     // Print frequency map
+//     for (auto it : mp) {
+//         cout << it.first << "->" << it.second << endl;
+//     }
+
+//     int q;
+//     cin >> q;
+//     while (q--) {
+//         char ch;
+//         cin >> ch;
+//         cout << mp[ch] << endl;
+//     }
+//     return 0;
+// }
+
+
+
+
+
+
 
 
 
