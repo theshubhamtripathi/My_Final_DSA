@@ -369,6 +369,89 @@
 // };
 
 
+//basically hashing is used to when we have to find number of occurences of a specific number in a array 
+//in more simpler words we can say that it is prestoring and fetching 
+//int func(int num, const vector<int>& arr) {
+//     int count = 0;
+//     for (int i = 0; i < arr.size(); i++) {
+//         if (arr[i] == num) {
+//             count++;
+//         }
+//     }
+//     return count;
+// }
+
+//HASH
+// #include<iostream>
+// using namespace std;
+// int main(){
+
+//     int n;
+//     cin>>n; //size of array
+//     int arr[n]; //craetion of array of size n 
+//     for(int i=0;i<n;i++){
+//         cin>>arr[i];
+//     }
+//     //precompute
+//     int hash[6] = {0}; //depends on max element in the test case +1
+//     for(int i=0;i<n;i++){
+//         hash[arr[i]] += 1;
+//     }
+//     int q;
+//     cin>>q;
+//     while(q--){
+//         int numbers;
+//         cin>>numbers;
+//         //fetch
+//         cout<<hash[numbers]<<endl;
+//     }
+//     return 0;
+// } 
+
+//if we are using array for hashing and using it in int main we can go to the max of 10^6 and if we use it as global it goes to 10^7 global means beyond int main these constraints also get applied for strings x
+//similar approach we can use for string for normal one u can guess yourself
+
+//HASH string
+// #include<iostream>
+// using namespace std;
+
+// void hashstring(const string &s){
+//     int n = s.size();
+//     int hash[256] = {0};  //to check for ascii value 
+
+//     // Precompute frequency for each character
+//     for(int i = 0; i < n; i++){
+//         hash[s[i]]++; // cast to unsigned char for safety
+//     }
+    
+//     int q;
+//     cin >> q;
+//     while(q--){
+//         char ch;
+//         cin >> ch;
+//         cout << hash[ch] << " ";
+//     }
+//     cout << endl; // optional, for better output formatting
+// }
+
+// int main(){
+//     string s;
+//     cin >> s;
+//     hashstring(s); // no 'cout <<', just call the function
+//     return 0;
+// }
+
+//
+
+
+
+
+
+
+
+
+
+
 
 
 
