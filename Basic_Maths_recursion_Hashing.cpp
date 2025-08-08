@@ -477,6 +477,8 @@
 
 //in the map if we store a string then it will store it as string not as as int 
 
+
+//string hash by map
 // #include<iostream>
 // #include<map>
 // using namespace std;
@@ -505,67 +507,50 @@
 //     return 0;
 // }
 
+//Map uses the time complexity of order of log n in every cases 
 
+//unordered map gives the time complexity of O(1) because the main reason is like they are not in a sorted way in worst way it goes O(n)
 
+//use unordered map first when it gives output like time limit exceeded then switch to map
 
+//mapping is majorly implemented in 3 ways division method mid square method and folding method we are just going to learn about the division method and collisions 
 
+// ////Find the highest/lowest frequency element
+// #include<iostream>
+// #include<map>
+// using namespace std;
+// int main(){
+//     int n;
+//     cin>>n;
+//     int arr[n];
+//     for(int i=0;i<n;i++){
+//         cin>>arr[i];
+//     }
+//     map<int,int> mp; 
+//     for(int i=0;i<n;i++){
+//         mp[arr[i]]++;
+//     }
+//     int maxf = 0;
+//     int minf = n;
+//     int maxe = 0;
+//     int mine = 0;
+//     for(auto it:mp){
+//         int e = it.first;
+//         int f = it.second;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//         if(f>maxf){
+//             maxf = f;
+//             maxe = e;
+//         }
+//         if(f<minf){
+//             minf = f;
+//             mine = e;
+//         }
+//     }
+//     cout << maxe << " " << maxf;
+//     cout << mine << " " << minf;
+//     return 0;
+// }
 
 
 
