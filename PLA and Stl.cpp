@@ -275,11 +275,17 @@
 //     }
 // };
 
-// binary palindrome
+//Binary palindrome
 
-//leaders in the array 
+//Leaders in the array 
 
-//alice apple tree
+//Alice apple tree
+
+//Swap the nibble in a byte
+
+//karastuba
+
+//longest sequence after flipping the bit 
 
 
 
