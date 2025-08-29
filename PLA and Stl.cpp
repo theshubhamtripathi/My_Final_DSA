@@ -287,6 +287,11 @@
 
 //longest sequence after flipping the bit 
 
+//joesephus 
+
+//The ceil() function returns the smallest integer value that is greater than or equal to the given floating-point number. ceil(4.3) returns 5.0, ceil(7.0) returns 7.0, and ceil(-2.7) returns -2.0.ceil iike chat so the higher value we will take 
+
+//The floor() function returns the largest integer value that is less than or equal to the given floating-point number. floor(4.3) returns 4.0, floor(7.0) returns 7.0, and floor(-2.7) returns -3.0.floor like zameen so lower value 
 
 
 
