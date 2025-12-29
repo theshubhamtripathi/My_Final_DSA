@@ -115,6 +115,57 @@ public:
         return longest;
 
 
-//count negative number in a sorted array 
+//count negative number in a sorted array
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        //1st approach n^2
+        // int m = grid.size(); //used to know the length of rows
+        // int n = grid[0].size(); //used to know the legth of voloumn
+        // int count = 0;
+        // for(int i=0;i<m;i++){
+        //     for(int j=0;j<n;j++){
+        //         if(grid[i][j] < 0){
+        //             count++;
+        //         }
+        //     }
+        // }
+        // return count;
+
+        //2nd approach binary seach or upper bound upper_bound gives an iterator; subtracting begin() converts it to an index. upper_bound returns an iterator pointing to:the first element which should come AFTER the given value according to the sorting order.
+        int m = grid.size();
+        int n = grid[0].size();
+// Yes ✅ — greater<int>() is used to sort in descending order.
+        int count = 0;
+        for(auto &row:grid){
+            int idx = upper_bound(row.begin(),row.end(),0,greater<int>())/*this whole part will return a iterator we must sub to get the index*/-row.begin();
+            count += n-idx;
+        }
+        return count;
+
+        //3rd appproach most optimal m+n
+        class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        int m = grid.size(); //size of row
+        int n = grid[0].size(); //size of col
+
+        int row = m-1;
+        int col = 0;
+
+        int r = 0;
+        while(row>=0 && col<n){
+            if(grid[row][col] >= 0){
+                col++;
+            }
+            else{
+                r += n-col; //decending order me soted ai bagar ek negative mil gaya toh uske baad sab negative honge
+                row--;
+            }
+        }
+        return r;
+    }
+};
+    
 
 
