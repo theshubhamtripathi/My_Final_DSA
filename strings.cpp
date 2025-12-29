@@ -58,4 +58,63 @@ void rotate(vector<int>& nums, int k) {
 }
 
 
-//
+//longest consecutive seq
+//appraoch one nlogn
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int count = 1; //not by 0 by 1 start 
+        int maxc = INT_MIN;
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i]-nums[i+1] == -1){
+                count++;
+            }
+            else if(nums[i] == nums[i+1]){
+                continue;
+            }
+            else{
+                maxc = max(count,maxc);
+                count = 1;
+            }
+        }
+        maxc = max(count,maxc); //we are using this here suppose if the complete array is consecutive seq then we are not chnaging the value of max thats ehy
+        return maxc;
+    }
+};
+
+// Use set when:
+// You only care whether something exists
+// You need unique elements
+// Example: longest consecutive sequence (hash set version)
+
+// Use map when:
+// You need to associate data
+// Count frequency
+// Store relationships
+//approach 2 n
+        int n = nums.size();
+        int longest = 1;
+        if(n==0) return 0;
+        unordered_set<int> st;
+        for(int i=0;i<n;i++){
+            st.insert(nums[i]);
+        }
+
+        for(auto it:st){
+            if(st.find(it-1) == st.end()){//means smaller number than it is not 
+                int x = it;
+                int cnt = 1;
+                while(st.find(x+1) != st.end()){//means consecutive num present
+                    x = x+1;
+                    cnt = cnt+1;
+                    longest = max(longest,cnt);
+                }
+            }
+        }
+        return longest;
+
+
+//count negative number in a sorted array 
+
+
