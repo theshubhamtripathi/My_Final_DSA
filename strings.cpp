@@ -166,6 +166,105 @@ public:
         return r;
     }
 };
+
+//set matrix 0
+// we just created a 2d temp matrix and there we did all the chnages required and then equate with original matrux 
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        // appraoch 1 tc (m*n + (m+n))
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        vector<vector<int>> temp = matrix;
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j] == 0){
+                    for(int k=0;k<n;k++){
+                        temp[i][k] = 0; //all row elements are 0 now
+                    }
+                    for(int k=0;k<m;k++){
+                        temp[k][j] = 0; //all col elements are 0 now
+                    }
+                }
+            }
+        }
+
+        matrix = temp;
+    }
+};
     
+//better space complexity time same This code first records which rows and columns contain zeros, then in a second pass sets all cells in those rows or columns to zero.
+        vector<bool> row(m,false);
+        vector<bool> col(n,false);
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j] == 0){
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(row[i] == true || col[j] == true){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
 
 
+//most optimal
+        int m = matrix.size(); // size of row
+        int n = matrix[0].size(); // size of col
+
+        bool first_r_impact = false;
+        bool first_c_impact = false;
+
+        //check first row impacted or not
+        for(int i=0;i<n;i++){
+            if(matrix[0][i] == 0){
+                first_r_impact = true;
+                break;
+            }
+        }
+
+        //check first col impacted or not
+        for(int i=0;i<m;i++){
+            if(matrix[i][0] == 0){
+                first_c_impact = true;
+                break;
+            }
+        }
+
+        //set markers in first row and col 
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        if(first_r_impact){
+            for(int i=0;i<n;i++){
+                matrix[0][i] = 0;
+            }
+        }
+
+        if(first_c_impact){
+            for(int i=0;i<m;i++){
+                matrix[i][0] = 0;
+            }
+        }
