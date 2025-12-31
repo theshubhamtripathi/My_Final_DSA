@@ -1,4 +1,4 @@
-//next permutation 
+///next permutation 
 // begin() points to the first element
 // end() points just AFTER the last element not the last element
 // The expression *nums.begin() will print the value of the first element in the container named nums. 
@@ -268,3 +268,37 @@ public:
                 matrix[i][0] = 0;
             }
         }
+
+
+//rotate matrix image by 90 degree 
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        //approach 1 
+        vector<vector<int>> ans(n,vector<int>(n)); //This line creates a 2-D vector with n rows and n columns, initialized with zeros.
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                ans[j][(n-1)-i] = matrix[i][j];
+            }
+        }
+        matrix = ans;
+    }
+};
+
+//aproach 2 we are following just 2 major steps in this thats is first transpose the matrix means chnaging the row with col and then swap the upper part of trangle with lower leaving the diagonal elements as they remain common 
+        //Transpose = swap only upper triangle with lower triangle
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                swap(matrix[i][j],matrix[j][i]);
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            reverse(matrix[i].begin(),matrix[i].end());
+        }
+    }
+};
+
+
+//rotate matrix in spriL ORDER 
