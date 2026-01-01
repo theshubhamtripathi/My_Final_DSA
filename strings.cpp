@@ -385,6 +385,17 @@ public:
         // }
         // return count;
 
+//steps to remember this 
+//         unordered_map<int,int> mp;
+// mp[0] = 1;
+
+// int presum = 0, cnt = 0;
+
+// for(each element){
+//     presum += element;
+//     cnt += mp[presum - k];
+//     mp[presum]++;
+
         int n = nums.size();
         unordered_map<int,int> mp;
         mp[0] = 1;
