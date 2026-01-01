@@ -300,5 +300,25 @@ public:
     }
 };
 
+//plus one 
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int n = digits.size();
+        for(int i=n-1;i>=0;i--){  //just iterating from back and normal mathmatical addition 
+            if(digits[i] != 9){ //if lastdigit is not equal to 9 then just add on and return
+                digits[i] += 1;
+                return digits;
+            }
+            else{
+                digits[i] = 0;  //if it is 9 then make that index 0 and carry forward to next digit 
+            }
+        }
+        digits.insert(digits.begin(),1); //if all the elments are 9 then all the digits are 0 and we have to add one 1 at the begenning and return thre naswer
+        return digits;
+    }
+};
+
 
 //rotate matrix in spriL ORDER 
+
