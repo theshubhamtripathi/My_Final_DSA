@@ -47,7 +47,7 @@ public:
     }
 };
 
-//remove outermost parentheses
+//remove outermost parentheses we created one coubter we keep on increasing it alsready said it is availd parenthesis now uderstand yourself 
 class Solution {
 public:
     string removeOuterParentheses(string s) {
@@ -68,4 +68,10 @@ public:
     }
 };
 
-//
+//reverse word in a string 
+// stringstream is used to treat a string like an input/output stream, just like cin and cout.
+// stringstream ss(string_name); and then ss >> variable;
+//stringstream is used to parse a string just like input stream, useful for splitting strings and converting data types.
+
+
+
