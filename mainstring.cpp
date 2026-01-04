@@ -68,6 +68,44 @@ public:
     }
 };
 
+
+//four divisors 
+class Solution {
+public:
+    int findsumdivisor(int num){
+        int c = 0; //divisor count how many no. of divisior
+        int sum = 0; //sum of divisors 
+
+        for(int i=1;i*i<=num;i++){ //we didnt use sqrt beacuse it is expensive
+        if(num%i == 0){
+            int d1 = i;
+            int d2 = num/i;
+            if(d2 == d1){
+                c += 1;
+                sum += d1;
+            }
+            else{
+                c += 2;
+                sum += (d1 + d2);
+            }
+        }
+        if(c>4){
+            return 0;
+        }
+    }
+    return (c==4) ? sum:0;
+}
+    int sumFourDivisors(vector<int>& nums) {
+        int n = nums.size();
+        int result = 0;
+        for(int &num:nums){
+            result += findsumdivisor(num);
+        }
+        return result;
+    }
+};
+
+
 //reverse word in a string 
 // stringstream is used to treat a string like an input/output stream, just like cin and cout.
 // stringstream ss(string_name); and then ss >> variable;
