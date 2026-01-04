@@ -112,4 +112,34 @@ public:
 //stringstream is used to parse a string just like input stream, useful for splitting strings and converting data types.
 
 
+class Solution {
+public:
+    string reverseWords(string s) {
+        //2 approaches are herre to solve this problem one using string stream and one is using simple intution step 1 first normally reverse the string then reverse each specific word again to get the desired result also make sure to minimise the spaces and gaps involved 
+
+    reverse(s.begin(),s.end());
+
+    int i=0;
+    int l=0;
+    int r=0;
+
+    int n = s.size();
+
+    while(i<n){
+        while(i<n && s[i] != ' '){
+            s[r++] = s[i++];
+        }
+        if(l<r){
+            reverse(s.begin()+l,s.begin()+r);
+            s[r] = ' ';
+            r++;
+            l = r;
+        }
+        i++;
+    }  
+    s = s.substr(0,r-1);
+    return s;
+    }
+};
+
 
