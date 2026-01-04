@@ -128,6 +128,9 @@ public:
     while(i<n){
         while(i<n && s[i] != ' '){
             s[r++] = s[i++];
+            //s[r] = s[i];   can be written like this 
+            //r++;
+            //i++;
         }
         if(l<r){
             reverse(s.begin()+l,s.begin()+r);
