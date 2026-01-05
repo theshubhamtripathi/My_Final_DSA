@@ -167,3 +167,29 @@ public:
     return ans;
     }
 };
+
+
+//1975 leetcode
+//we just have to see the count of negative numbers if it is even then we are sure the sum will be the same cause they will cancel out the negatives else as we have to return the max value sum we will find the min value of element from absolute and finally we will return sum - 2*mine;
+class Solution {
+public:
+    long long maxMatrixSum(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        long long sum = 0;
+        int mine = INT_MAX;
+        int count =0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                mine = min(mine,abs(matrix[i][j]));
+                sum += abs(matrix[i][j]);
+                if(matrix[i][j] < 0){
+                    count++;
+                }
+            }
+        }
+        if(count%2 == 0){
+            return sum;
+        }
+        return sum - 2*mine;  //decrementing 2 times as the sum is getting 0 then negative
+    }
+};
