@@ -93,7 +93,7 @@ public:
             return 0;
         }
     }
-    return (c==4) ? sum:0;
+    return (c==4) ? sum:0;      //condition ? value_if_true : value_if_false  If divisor == 4, return sum, otherwise return 0
 }
     int sumFourDivisors(vector<int>& nums) {
         int n = nums.size();
@@ -145,4 +145,25 @@ public:
     }
 };
 
+//using string stream we make tokens we split the string into different parts using the space in between them them add them in vertor then again add them in a strong adding spaces between them excepting the last element
 
+    stringstream ss(s);
+    vector<string> words;
+    string word;
+
+    while(ss>>word){
+        words.push_back(word);   //dividing each word and adding them into the vector so we can easily do the reverse
+    }
+
+    reverse(words.begin(),words.end());
+
+    string ans = "";
+    for(int i=0;i<words.size();i++){
+        ans += words[i];  //adding each word 
+        if(i != words.size()-1){ //this is used for adding the space aftereach words 
+            ans += " ";
+        }
+    }
+    return ans;
+    }
+};
