@@ -193,3 +193,21 @@ public:
         return sum - 2*mine;  //decrementing 2 times as the sum is getting 0 then negative
     }
 };
+
+//largest odd number in a string
+//whenever we have to find the find the value in integer of a character we just have to substarct it with '0'
+//in short to convert char to int we have to subaratct that char with '0'
+//Subtracting '0' from a digit character converts it into its integer value due to ASCII encoding.
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        int n = num.size();
+        for(int i=n-1;i>=0;i--){
+            if((num[i]-'0')%2 != 0){
+                return num.substr(0,i+1);
+            }
+        }
+        return "";
+    }
+};
+
