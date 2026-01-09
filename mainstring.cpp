@@ -211,3 +211,27 @@ public:
     }
 };
 
+
+//longest common prefix 
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        //brute in this we have to check the longest common prefix possible we will iterate form the first letter then we go till the end if we find the prefix as same we will keep on pushing it to the temp array and return that string 
+        //2nd and most optimal approcah will be by sorting int his we are sorting the whole string and then comapring the first and last letter cause they will be the most dofferent one as the sorting happens lexicographically
+        string ans = "";
+        if(strs.empty()) return "";
+        sort(strs.begin(),strs.end()); //sort the string
+        string first = strs[0]; //first word
+        string last = strs.back(); //strs[strs.size()-1] last 
+        int len = min(first.size(), last.size());  //Comparing two strings → loop till min(lengths)
+        for(int i=0;i<len;i++){
+            if(first[i] != last[i]){
+                break;
+            }
+            else{
+                ans += first[i];
+            }
+        }
+        return ans;
+    }
+};
