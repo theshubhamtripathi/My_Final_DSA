@@ -235,3 +235,27 @@ public:
         return ans;
     }
 };
+
+//isomorphic string 
+//in this question we just created 2 maps and comapred the each char maps if mapping is found but the mapping is wrong or it is mapped to a different char return false else store the map ad retrun true 
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        unordered_map<char, char> mp1;
+        unordered_map<char, char> mp2;
+
+        int n = s.size();
+        for(int i=0;i<n;i++){
+            char s1 = s[i];
+            char t1 = t[i];
+
+            if(mp1.find(s1) != mp1.end() && mp1[s1] != t1 ||
+            mp2.find(t1) != mp2.end() && mp2[t1] != s1){
+                return false;
+            }
+            mp1[s1] = t1;
+            mp2[t1] = s1;
+        }
+        return true;
+    }
+};
