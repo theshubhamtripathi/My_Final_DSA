@@ -259,3 +259,43 @@ public:
         return true;
     }
 };
+
+//array ke left rotate me ek temp array banake temp[(i+k)%n] = nums[i]
+//right rotate me ek temp array banake temp[(i-k+n)%n] = nums[i] karna hota hai
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+        // int n = s.size();
+        // if(s.size() != goal.size()) return false;
+
+        // for(int k=0;k<n;k++){
+        //     string temp(n,' ');
+        //     for(int i=0;i<n;i++){
+        //         temp[(i+k)%n] = s[i];
+        //     }
+        //     if(goal == temp) return true;
+        // }
+        // return false;
+
+        //using stl rotate we use it like this rotate(s.begin()(straying position),s.begin()+k(which position will tell the starting position of the string),s.end()(ending position))
+        // int n = s.size();
+        // for(int i=0;i<n;i++){
+        //     rotate(s.begin(),s.begin()+1,s.end());
+        //     if(s==goal){
+        //         return true;
+        //     }
+        // }
+        // return false;
+
+        //approach 3 we will use one property of strings that if we add 2 same strings together then we will get all the rotations as a substrings in it
+        int n = s.size();
+        int m = goal.size();
+
+        if(n != m) return false;
+
+        if((s+s).find(goal) != string::npos){
+            return true;
+        }
+        return false;
+    }
+};
