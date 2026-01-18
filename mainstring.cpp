@@ -288,6 +288,7 @@ public:
         // return false;
 
         //approach 3 we will use one property of strings that if we add 2 same strings together then we will get all the rotations as a substrings in it
+        //string::npos is a special value that tells us a substring does NOT exist in a string.
         int n = s.size();
         int m = goal.size();
 
@@ -299,3 +300,21 @@ public:
         return false;
     }
 };
+    //ch - 'a' converts a lowercase character into a 0-based index so we can store and access data easily.
+    //approach 4
+    vector<int> count(26,0);
+        for(auto it:s){
+            count[it-'a']++;
+        }
+        for(auto it:t){
+            count[it-'a']--;
+        }
+        for(int i=0;i<count.size();i++){
+            if(count[i] != 0){
+                return false;
+            }
+        }
+        return true;
+//very fast lookup better than map[ but if unicode one comes thes use map more easy 
+
+
