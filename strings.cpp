@@ -411,4 +411,37 @@ public:
     }
 };
 
+//whta we did we just gone theough this question and just do one thing first we found the mindiff and then whatevevr combo made that mindiff we pushback it to the temp vector which we created 
 
+//{arr[i], arr[j]} creates a vector of two ints, and push_back adds it to the 2D vec
+
+class Solution {
+public:
+    vector<vector<int>> minimumAbsDifference(vector<int>& arr) {
+        sort(arr.begin(),arr.end());
+        int n = arr.size();
+        int i = 0;
+        int j = 1;
+        int mindiff = INT_MAX;
+        while(j<n){
+            if((arr[j]-arr[i])<mindiff){
+                mindiff = (arr[j]-arr[i]);
+            }
+            i++;
+            j++;
+        }
+        // half the work is done we are calculating the mindiff now we just have to push the piars in the temp vector 
+
+        vector<vector<int>> ans;
+        i = 0;
+        j = 1;
+        while(j<n){
+            if((arr[j]-arr[i]) == mindiff){
+                ans.push_back({arr[i],arr[j]});
+            }
+            i++;
+            j++;
+        }
+        return ans;
+    }
+};
