@@ -349,3 +349,24 @@ public:
 };
 
 //same question by using heaps 
+
+//leetcode 1614
+class Solution {
+public:
+    int maxDepth(string s) {
+        int maxnested = 0;
+        int count = 0;
+        int n = s.size();
+        for(int i=0;i<n;i++){
+            if(s[i] == '('){
+                count++;
+            }
+            else if(s[i] == ')'){
+                count--;
+            }
+            maxnested = max(count,maxnested);  //compare the number of count and maxnested and return what is max also as above it increases adter every opening bracket and decrrwasing after evevry closing bracket
+        }
+        return maxnested;
+    }
+};
+
