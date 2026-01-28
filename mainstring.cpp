@@ -318,3 +318,34 @@ public:
 //very fast lookup better than map[ but if unicode one comes thes use map more easy 
 
 
+//leetcode 451 sort charracter by freq
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int> mp;
+        for(auto it : s){
+            mp[it]++;
+        }
+        vector<pair<char,int>> a;
+        for(auto it:mp){
+            a.push_back({it.first,it.second});
+        }
+        auto lambda = [](pair<char,int>& p1, pair<char,int>& p2){
+            return p1.second>p2.second;
+        };
+        sort(a.begin(),a.end(),lambda);
+        
+        string ans = "";
+        for(int i=0;i<a.size();i++){
+            while(a[i].second--){
+                ans += a[i].first;
+            }
+        }
+        return ans;
+
+        //main concept here is vector of pair 
+
+    }
+};
+
+//same question by using heaps 
