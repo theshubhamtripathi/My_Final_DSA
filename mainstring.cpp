@@ -390,3 +390,81 @@ public:
 };
 
 //leetcode 13
+class Solution {
+public:
+    int romanToInt(string s) {
+        // int n = s.size();
+        // int count = 0;
+
+        // for(int i=0;i<n;i++){
+
+        //     if(s[i] == 'I'){
+        //         if(i+1 < n && (s[i+1] == 'V' || s[i+1] == 'X')){
+        //             count -= 1;   // subtraction case
+        //         }
+        //         else{
+        //             count += 1;
+        //         }
+        //     }
+
+        //     else if(s[i] == 'V'){
+        //         count += 5;
+        //     }
+
+        //     else if(s[i] == 'X'){
+        //         if(i+1 < n && (s[i+1] == 'L' || s[i+1] == 'C')){
+        //             count -= 10;
+        //         }
+        //         else{
+        //             count += 10;
+        //         }
+        //     }
+
+        //     else if(s[i] == 'L'){
+        //         count += 50;
+        //     }
+
+        //     else if(s[i] == 'C'){
+        //         if(i+1 < n && (s[i+1] == 'D' || s[i+1] == 'M')){
+        //             count -= 100;
+        //         }
+        //         else{
+        //             count += 100;
+        //         }
+        //     }
+
+        //     else if(s[i] == 'D'){
+        //         count += 500;
+        //     }
+
+        //     else if(s[i] == 'M'){
+        //         count += 1000;
+        //     }
+        // }
+
+        // return count;{
+
+        unordered_map<char,int> mp;
+        mp['I']=1;
+        mp['V']=5;
+        mp['X']=10;
+        mp['L']=50;
+        mp['C']=100;
+        mp['D']=500;
+        mp['M']=1000;
+
+        int count = 0;
+
+        for(int i=0;i<s.size();i++){
+
+            if(i+1 < s.size() && mp[s[i]] < mp[s[i+1]]){
+                count -= mp[s[i]];
+            }
+            else{
+                count += mp[s[i]];
+            }
+        }
+
+        return count;
+    }
+};
