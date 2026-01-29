@@ -468,3 +468,70 @@ public:
         return count;
     }
 };
+
+
+//atoi function 
+//ASCII to Integer : It converts a string number into an integer.
+//now we use stoi to convert a string to integer 
+
+class Solution {
+public:
+    int myAtoi(string s) {
+        int i = 0;
+        int l = s.size();
+        //leading whitespace
+        while(i<l && isspace(s[i])){
+            i++;
+        }
+        //nothing more present in between
+        if(i==l){
+            return 0;
+        }
+        //check for sign
+        bool neg = false;
+        if(s[i] == '-'){
+            neg = true;
+            //move to next
+            i++;
+        }
+        else if(s[i] == '+'){
+            //move to next
+            i++;
+        }
+        else if(!isdigit(s[i])){
+            return 0;
+        }
+        if(i==l){
+            return 0;
+        }
+        //extract num and return int value 
+        int value = 0;
+        int max = INT_MAX/10;
+        int min = INT_MIN/10;
+        while(i<l && isdigit(s[i])){
+            int digit = s[i] - '0'; //if we minus be the any string by ascii of 0 it return the value of that number
+            if(value>max){
+                return INT_MAX;
+            }
+            else if(value == max && digit>7){
+                return INT_MAX;
+            }
+            if(value<min){
+                return INT_MIN;
+            }
+            else if(value == min && digit>8){
+                return INT_MIN;
+            }
+            //if this is the negative number
+            if(neg){
+                value = value*10 + (-digit);
+            }
+            //if this is the positive number
+            else{
+                value = value*10 + digit;
+            }
+            i++;
+        }
+        return value;
+    }
+};
