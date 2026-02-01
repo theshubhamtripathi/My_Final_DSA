@@ -552,3 +552,28 @@ public:
             }
         }
         return letters[0];
+
+
+
+//leetcode 3010
+class Solution {
+public:
+    int minimumCost(vector<int>& nums) {
+        // sort(nums.begin()+1,nums.end());
+        // return nums[0]+nums[1]+nums[2];
+
+        int n = nums.size();
+        int firstmin = INT_MAX;
+        int secondmin = INT_MAX;
+        for(int i=1;i<n;i++){
+            if(nums[i]<firstmin){
+                secondmin = firstmin;
+                firstmin = nums[i];
+            }
+            else if(nums[i]<secondmin){
+                secondmin = nums[i];
+            }
+        }
+        return nums[0]+firstmin+secondmin;
+    }
+};
