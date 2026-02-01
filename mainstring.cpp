@@ -577,3 +577,82 @@ public:
         return nums[0]+firstmin+secondmin;
     }
 };
+
+
+//leetcode 5 
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        //the method which i will use to solve this is expland from the centre we can also solve this using machers algorithm but i am using this right now later we will see the machers one 
+
+//Every palindrome is symmetric and expands from its center.
+
+// A palindrome can have:
+
+// Odd length center → single character (e.g., "racecar")
+
+// Even length center → between two characters (e.g., "abba")
+
+// Instead of checking all substrings, we treat each index as a possible center.
+
+// For each index i, we expand in two ways:
+
+// Odd palindrome: left = i, right = i
+
+// Even palindrome: left = i, right = i+1
+
+// While expanding:
+
+// Keep moving left-- and right++
+
+// Continue only if s[left] == s[right]
+
+// Each expansion gives a valid palindrome, and we track the maximum length one.
+
+// Final answer is obtained using substring:
+
+// s.substr(start, maxLen)
+
+// Time Complexity: O(n²)
+
+// Space Complexity: O(1)
+
+    int n = s.size();
+
+    int start = 0;
+    int maxl = 1;
+    for(int i=0;i<n;i++){
+
+        //if odd lenghth palindrome 
+        int left = i;
+        int right = i;
+        while(left>=0 && right<n && s[left] == s[right]){
+            int len = right-left+1;
+            if(maxl<len){
+                maxl = len;
+                start = left; //cause at last using substr we need start and len
+            }
+            left--;
+            right++;
+        }
+
+        //if even lenghth palindrome 
+        left = i;
+        right = i+1;
+        while(left>=0 && right<n && s[left] == s[right]){
+            int len = right-left+1; //total length 
+            if(maxl<len){
+                maxl = len;
+                start = left; //cause at last using substr we need start and len
+            }
+            left--;
+            right++;
+        }
+    }
+    return s.substr(start,maxl);
+    }
+};
+
+//Why do we do left-- and right++ ?
+
+//Because a palindrome grows outward from its center.
