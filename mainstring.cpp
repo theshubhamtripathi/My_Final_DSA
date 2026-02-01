@@ -535,3 +535,20 @@ public:
         return value;
     }
 };
+
+
+//This converts digit character → integer digit. Subtracting with '0' ch-'0'
+//Characters are stored as ASCII values. c is at index 2 in alphabet ch - 'a';
+
+//leetcode 744
+        int n = letters.size();
+        int value = target-'a'; //kind of precedence where it lies 
+        int min = 0;
+        for(int i=0;i<n;i++){
+            min = letters[i] - 'a';
+            if(value<min){
+                return letters[i]; 
+                break;
+            }
+        }
+        return letters[0];
