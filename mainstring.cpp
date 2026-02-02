@@ -656,3 +656,54 @@ public:
 //Why do we do left-- and right++ ?
 
 //Because a palindrome grows outward from its center.
+
+
+
+//leetcode 
+// ✅ Method 1: Using Frequency Array (Best)
+// Concept Points:
+// Fix starting index i
+// Expand ending index j
+// Maintain freq[26] for character count
+// For each substring:
+// Find maxf and minf from freq array
+// Add (maxf - minf) to answer
+// Efficient because array size is constant (26)
+// Complexity:
+// O(n² × 26) → Fast
+class Solution {
+public:
+    int beautySum(string s) {
+        int n = s.size();
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            vector<int> f(26,0);
+            for(int j=i;j<n;j++){
+                f[s[j] - 'a']++; //beause with j the string is increasing
+
+                int minf = INT_MAX;
+                int maxf = 0;
+                for(int k=0;k<26;k++){
+                    if(f[k]>0){
+                        maxf = max(f[k],maxf);
+                        minf = min(f[k],minf);
+                    }
+                }
+                sum += (maxf-minf);
+            }
+        }
+        return sum;
+    }
+};
+
+// ✅ Method 2: Using Map / Unordered_Map
+// Concept Points:
+// Fix starting index i
+// Expand substring by increasing j
+// Store character frequencies in unordered_map
+// For each substring:
+// Traverse map to get max and min frequency
+// Add beauty to sum
+// Useful when characters are not limited to only 26 letters
+// Complexity:
+// O(n² × unique_chars) → Slight slower than array
