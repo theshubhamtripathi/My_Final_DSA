@@ -44,5 +44,32 @@ int main() {
     cout << maxs;
 }
 
-2.)
+2.)longest subarray and substring with sum <= k in this type of problem we follow the pattern of brute better and optimal 
+
+brute : in this we have to generate all the subarray tc O(n^2) 
+
+#include<bits/stdc++.h>
+int main(){
+    vector<int> a = {1,2,3,4,5,6,7,8};
+    int maxlen = 0;
+    int n = a.size();
+    int k = 15;
+    //generate all subarrays
+    for(int i=0;i<n;i++){
+        int sum = 0;
+        for(int j=i;j<n;j++){
+            sum += a[j];
+            if(sum<=k){
+                maxlen = max(maxlen,j-i+1);
+            }
+            else{
+                break;  // works only for positive numbers if array consist of negative number then dont use this 
+            }
+        }
+    }
+    cout<<maxlen;
+    return 0;
+}
+
+better : 
   
