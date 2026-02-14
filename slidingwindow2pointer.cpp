@@ -71,5 +71,38 @@ int main(){
     return 0;
 }
 
-better : 
-  
+better : in better approach we will start with the window size of 1 and and we will use the concept of expand and shrink as we know we have two pointer in this 
+l for the left most part and r for the right most part so for expanding we will chnage the r(increase) and for shrink we will change the l(dercrease) 
+
+
+lenght at any specific position will be : r-l+1 //j-i+1
+
+#include<bits/stdc++.h>
+int main(){
+    vector<int> a = {1,2,3,4,5,5,6,7};
+    int n = a.size();
+    int l = 0;
+    int r = 0;
+    int sum = 0;
+    int k = 15;
+    int maxlen = 0;
+    while(r<n){
+        sum += a[r];  //expand window
+        while(sum>k){
+            sum -= a[l];  //shrink window
+            l++;
+        }
+        if(sum<=k){
+            maxlen = max(maxlen,r-l+1);
+        }
+        r++;
+    }
+    cout<<maxlen;
+    return 0;
+}
+
+//this only works when All numbers are positive
+
+
+Optimal : 
+    
