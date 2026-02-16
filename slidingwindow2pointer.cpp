@@ -169,4 +169,21 @@ to solve this we have to do 2 things ro approaches we have to follow
 
 4.) finding the shortest or min winsow where any condition is given 
 we will shink till the lowest possible the shortest we will get we will return it 
+
+//leetcode 190 ptod
+class Solution {
+public:
+    int reverseBits(int n) {
+        if (n == 0){
+            return 0;
+        }
+        int result = 0;
+        for(int i=0;i<32;i++){
+            result <<= 1; //leftshift by 1. 
+            result = ((n&1)|result); //(n&1) tells the last digit of n then add it to the result
+            n >>= 1; //as the digit is added move the digit to the right
+        }
+        return result;
+    }
+};    
     
