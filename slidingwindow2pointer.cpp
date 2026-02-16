@@ -138,4 +138,35 @@ tc = O(n+n)
 
 
 Optimal : tc = O(n)
+#include<bits/stdc++.h>
+int main(){
+    vector<int> a = {1,2,3,4,5,5,6,7};
+    int n = a.size();
+    int l = 0;
+    int r = 0;
+    int sum = 0;
+    int k = 15;
+    int maxlen = 0;
+    while(r<n){
+        sum += a[r];  //expand window
+        if(sum>k){   //just chnage while to if 
+            sum -= a[l];  //shrink window
+            l++;
+        }
+        if(sum<=k){
+            maxlen = max(maxlen,r-l+1);
+        }
+        r++;
+    }
+    cout<<maxlen;
+    return 0;
+}
+
+
+3.) no of subarrays where some condition will be given
+to solve this we have to do 2 things ro approaches we have to follow 
+1.)no of subarrays whose sum <= k substract it with no of subarrays whose sum <= k-1
+
+4.) finding the shortest or min winsow where any condition is given 
+we will shink till the lowest possible the shortest we will get we will return it 
     
