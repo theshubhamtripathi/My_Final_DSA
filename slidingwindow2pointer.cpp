@@ -187,3 +187,42 @@ public:
     }
 };    
     
+
+//leetcode 693 ptod
+class Solution {
+public:
+    bool hasAlternatingBits(int n) {
+        //approach 1 
+        //in c++ we have one method known as bitset which is 32 bit conainer and it stores the n as binary for implementing this method we alos have to find highest set bit which is equal to log2(n) till there our loop will go 
+        // bitset<32> b(n);
+        // int bits = log2(n);
+        // for(int i=0;i<bits;i++){
+        //     if(b[i] == b[i+1]) return false;
+        // }
+        // return true;
+
+        //approach 2
+        //in this we have just play with n%2 to get the bits and n/2 to move to next 
+            // int currbit = n%2;
+            // n /= 2;
+
+            // while(n>0){
+            //     if(currbit == n%2){
+            //         return false;
+            //     }
+            //     currbit = n%2;
+            //     n /= 2;
+            // }
+            // return false;
+
+
+        //approach 3
+        //for this approach we will do if we take xor operation that means different pe 1 and same me zero n ^ (n>>1) left shift ya right shift ye >> iske muh dekh ke socha karo then find the number of set bits in that wo (result)&(result++) if it comes == 0 then we have all set bits then the result is true else false we will use unsigned int to know the out of range problem 
+
+        unsigned int result = n ^ (n>>1);
+        return (result&(result+1))==0;
+
+
+    }
+};
+
