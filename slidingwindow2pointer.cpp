@@ -226,3 +226,55 @@ public:
     }
 };
 
+//leetcode 1423
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        //my attempt
+        // int n = cardPoints.size();
+        // int l = 0;
+        // int r = k-1;
+        // int sum = 0;
+        // int maxsum = 0;
+
+        // for(int i=l;i<=r;i++){
+        //     sum += cardPoints[i];
+        // }
+        // maxsum = sum;
+        // while(r<n){
+        //     sum -= cardPoints[l];
+        //     l++;
+        //     r++;
+        //     sum += cardPoints[r];
+        //     maxsum = max(maxsum,sum);
+        // }
+        // return maxsum;
+
+        int n = cardPoints.size();
+        int lsum = 0;
+        int rsum = 0;
+        int maxsum = 0;
+
+        for(int i=0;i<k;i++){
+            lsum += cardPoints[i];
+        }
+        maxsum = lsum;
+        int rindex = n-1;
+        for(int i=k-1;i>=0;i--){
+            lsum -= cardPoints[i];
+            rsum += cardPoints[rindex];
+            rindex--;
+            maxsum = max(maxsum,lsum+rsum);
+        }
+        return maxsum;
+    }
+};
+
+This problem is same as:
+Remove a subarray of size n-k with minimum sum
+Because picking k from ends = removing middle.
+
+
+//leetcode 3
+
+    
