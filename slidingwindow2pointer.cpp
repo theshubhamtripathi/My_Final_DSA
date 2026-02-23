@@ -226,7 +226,7 @@ public:
     }
 };
 
-//leetcode 1423
+//leetcode 1423 O(k^2)
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
@@ -274,7 +274,54 @@ This problem is same as:
 Remove a subarray of size n-k with minimum sum
 Because picking k from ends = removing middle.
 
-
+What is __builtin_popcount?
+👉 It counts how many 1-bits are present in a number.
+    
 //leetcode 3
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        //approach 1 order of n^2 generation all the substrings
+        // int n = s.size();
+        // int maxlen = 0;
+        // for(int i=0;i<n;i++){
+        //     vector<int> hash(256,0); //we have to reset it every time thats why here 
+        //     for(int j=i;j<n;j++){
+        //         if(hash[s[j]] == 1) break;
+        //         maxlen = max(j-i+1,maxlen);
+        //         hash[s[j]] = 1;
+        //     }
+        // }
+        // return maxlen;
 
+//in this appraoch we are making it do in O(n) complexity as we have to just consider a empty window and we will keep of shirnking and expanding it based on the conditions given
+
+    int l = 0;
+    int r = 0;
+    int maxl = 0;
+    vector<int> hash(256,-1);
+    int n = s.size();
+    while(r<n){
+        if(hash[s[r]] != -1)/*means element is present*/{
+            if(hash[s[r]]>=l){
+                l=hash[s[r]]+1;
+            }
+        }
+        maxl = max(maxl,r-l+1);
+        hash[s[r]] = r;
+        r++;
+        }
+        return maxl;
+    }
+// hash[s[r]] >= l
+// Because character may appear outside current window.
+
+// Example:
+// Window = [l=3 ... r]
+// Character last appeared at index 1
+
+// 👉 That repeat does NOT matter.
+// So we only move l if repeat is inside current window.
+    
+};
     
