@@ -308,7 +308,7 @@ public:
             }
         }
         maxl = max(maxl,r-l+1);
-        hash[s[r]] = r;
+        hash[s[r]] = r;  //👉 “Remember where this character appeared last.”
         r++;
         }
         return maxl;
@@ -325,3 +325,6 @@ public:
     
 };
     
+
+
+//leetcode 1461 ptod
