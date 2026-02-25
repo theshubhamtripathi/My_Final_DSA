@@ -327,4 +327,30 @@ public:
     
 
 
-//leetcode 1461 ptod
+//leetcode 1356 ptod
+class Solution {
+public:
+
+    int firstbit(int n){
+        int c = 0;
+        while(n>0){
+            c += n & 1;
+            n >>= 1;
+        }
+        return c;
+    }
+
+    vector<int> sortByBits(vector<int>& arr) {
+        auto lambda = [&](int &a,int &b){ //we use & here to get the reference for the function 
+            int ca = firstbit(a); //count a counts the one bits
+            int cb = firstbit(b);
+
+            if(ca == cb) return a<b;
+            return ca<cb;
+        };
+        sort(arr.begin(),arr.end(),lambda);
+        return arr;
+    }
+};
+
+
