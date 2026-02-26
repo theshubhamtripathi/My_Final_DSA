@@ -353,4 +353,39 @@ public:
     }
 };
 
+//leetcode 1404
+class Solution {
+public:
+
+    void addOne(string &s){
+        int n = s.size();
+        while(n>=0 && s[n] !=0){
+            s[n] = '0';
+            n--;
+        }
+        if(n<0){
+            s = s+'1';
+        }
+        else{
+            s[n] = '1';
+        }
+    }
+    int numSteps(string s) {
+        //in this question we have to just focus on the 2 things first that we have to add when when odd comes that we will check by checking the lastdidgit if it is one or not if odd we will make 1 as 0 till all the ones and make the last as one or the left zero after the one else we have to pop the 0 digit if it is even
+        int n = s.size();
+        int count = 0;
+        while(n>1){
+            if(s[n-1] == '0'){
+                s.pop_back();
+            }
+            else{
+                addOne(s);
+            }
+            count++;
+        }
+        return count;
+    }
+};
+
+//leetcode 1004
 
