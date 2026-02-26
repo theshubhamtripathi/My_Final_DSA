@@ -357,35 +357,49 @@ public:
 class Solution {
 public:
 
-    void addOne(string &s){
-        int n = s.size();
-        while(n>=0 && s[n] !=0){
-            s[n] = '0';
-            n--;
+    // Function to add 1 to a binary string
+    void addOne(string &s) {
+        int i = s.size() - 1;  // Start from last index
+        
+        // Handle carry while bit is '1'
+        while (i >= 0 && s[i] == '1') {
+            s[i] = '0';       // 1 + 1 = 0 (carry continues)
+            i--;
         }
-        if(n<0){
-            s = s+'1';
-        }
-        else{
-            s[n] = '1';
+
+        if (i >= 0) {
+            // Found a '0', just make it '1'
+            s[i] = '1';
+        } else {
+            // All bits were '1'
+            // Example: 111 → 1000
+            s = '1' + s;
         }
     }
+
     int numSteps(string s) {
-        //in this question we have to just focus on the 2 things first that we have to add when when odd comes that we will check by checking the lastdidgit if it is one or not if odd we will make 1 as 0 till all the ones and make the last as one or the left zero after the one else we have to pop the 0 digit if it is even
-        int n = s.size();
         int count = 0;
-        while(n>1){
-            if(s[n-1] == '0'){
+
+        // Continue until string becomes "1"
+        while (s != "1") {
+
+            if (s.back() == '0') {
+                // If even → divide by 2
+                // Removing last bit is same as dividing by 2
                 s.pop_back();
             }
-            else{
+            else {
+                // If odd → add 1
                 addOne(s);
             }
+
             count++;
         }
+
         return count;
     }
 };
+
 
 //leetcode 1004
 
