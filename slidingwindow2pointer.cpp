@@ -452,7 +452,7 @@ public:
         return maxl;
 
 //optimal
-int r = 0;
+        int r = 0;
         int l = 0;
         int maxl = 0;
         int n = nums.size();
@@ -474,3 +474,107 @@ int r = 0;
             r++;
         }
         return maxl;
+
+With while
+
+You guarantee:
+At every iteration:
+Window is valid (zero ≤ k)
+
+With if
+
+You allow:
+Window may be invalid briefly
+But next iteration it corrects itself
+
+
+//leetcode 424
+//as this is very similar to consecutive one problem we done just before we have to see in this the max occurence of the letter which is coming the most no of time 
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        //brute force
+        //we can find the max by len-maxf
+        int n = s.size();
+        int maxl = 0;
+        for(int i=0;i<n;i++){
+            vector<int> hash(26,0);
+            int maxf = 0;
+            int changes = 0;
+            for(int j=i;j<n;j++){
+                hash[s[j]-'A']++;
+                maxf = max(maxf,hash[s[j]-'A']);
+                changes = (j-i+1) - maxf;
+
+                if(changes<=k){
+                    maxl = max(j-i+1,maxl);
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return maxl;
+    }
+};
+
+//better
+//better
+        int r = 0;
+        int l = 0;
+        int maxf = 0;
+        int maxl = 0;
+        vector<int> hash(26,0);
+        int n = s.size();
+        while(r<n){
+            hash[s[r]-'A']++;
+            maxf = max(maxf,hash[s[r]-'A']);
+            while((r-l+1)-maxf>k){
+                hash[s[l]-'A']--;
+                l++;
+                maxf = 0;
+                for(int i=0;i<26;i++){
+                    maxf = max(maxf,hash[i]);
+                }
+            }
+            if((r-l+1)-maxf<=k){
+                maxl = max(maxl,r-l+1);
+            }
+            r++;
+        }
+        return maxl;
+
+        //optimal
+        class Solution {
+public:
+    int characterReplacement(string s, int k) {
+
+        int l = 0;
+        int maxl = 0;
+        int maxf = 0;
+        vector<int> hash(26, 0);
+
+        for(int r = 0; r < s.size(); r++) {
+
+            hash[s[r] - 'A']++;
+
+            // only increase maxf
+            maxf = max(maxf, hash[s[r] - 'A']);
+
+            // shrink window if invalid
+            while((r - l + 1) - maxf > k) {
+                hash[s[l] - 'A']--;
+                l++;
+            }
+
+            maxl = max(maxl, r - l + 1);
+        }
+
+        return maxl;
+    }
+};
+
+
+//leetcode 1248
+
