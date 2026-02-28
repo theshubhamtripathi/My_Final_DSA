@@ -402,4 +402,75 @@ public:
 
 
 //leetcode 1004
+//brute
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        //we can convert this question into find the max subarray with most k zeros means both are doing the same thing  
+        int n = nums.size();
+        int maxl = 0;
+        for(int i=0;i<n;i++){
+            int zero = 0;
+            for(int j=i;j<n;j++){
+                if(nums[j] == 0){
+                    zero++;
+                }
+                if(zero<=k){
+                    maxl = max(maxl,j-i+1);
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return maxl;
+    }
+};
 
+//better
+        int r = 0;
+        int l = 0;
+        int maxl = 0;
+        int n = nums.size();
+        int zero = 0;
+
+        while(r<n){
+            if(nums[r] == 0){
+                zero++;
+            }
+            while(zero>k){
+                if(nums[l] == 0){
+                    zero--;
+                }
+                l++; // ✅ move left no matter what
+            }
+            if(zero<=k){
+                maxl = max(maxl,r-l+1);
+            }
+            r++;
+        }
+        return maxl;
+
+//optimal
+int r = 0;
+        int l = 0;
+        int maxl = 0;
+        int n = nums.size();
+        int zero = 0;
+
+        while(r<n){
+            if(nums[r] == 0){
+                zero++;
+            }
+            if(zero>k){
+                if(nums[l] == 0){
+                    zero--;
+                }
+                l++; // ✅ move left no matter what
+            }
+            if(zero<=k){
+                maxl = max(maxl,r-l+1);
+            }
+            r++;
+        }
+        return maxl;
