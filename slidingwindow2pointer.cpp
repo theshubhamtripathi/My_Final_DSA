@@ -575,6 +575,38 @@ public:
     }
 };
 
+//leetcode 762
+class Solution {
+public:
+    bool isprime(int n){
+        if(n <= 1) return false;
+        for(int i=2;i*i<=n;i++){
+            if(n%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
 
+    int setbits(int n){
+    int count = 0;
+    while(n){
+        count += (n & 1);
+        n >>= 1;
+        }
+        return count;
+    }
+
+    int countPrimeSetBits(int left, int right) {
+        int r = 0;
+        for(int i=left;i<=right;i++){
+            //set bits find we can use __builtin_popcount();
+            if(isprime(setbits(i))){
+                r++;
+            }
+        }
+        return r;
+    }
+};
 //leetcode 1248
 
