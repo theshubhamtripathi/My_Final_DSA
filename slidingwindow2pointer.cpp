@@ -694,5 +694,47 @@ public:
 
 
 //leetcode 1248
+class Solution {
+public:
+    int atmost(vector<int> &nums,int k){
+        if(k<0) return 0;
+        int l=0;
+        int r=0;
+        int sum=0;
+        int count=0;
+        while(r<nums.size()){
+            sum += nums[r]%2;
+            while(sum>k){
+                sum -= nums[l]%2;
+                l++;
+            }
+            count += r-l+1;
+            r++;
+        }
+        return count;
+    }
+    
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        int count = 0;
+        //lets generate all the subarrays
+        // for(int i=0;i<n;i++){
+        //     int oddc = 0;
+        //     for(int j=i;j<n;j++){
+        //         if(nums[j]%2 != 0){
+        //             oddc++;
+        //         }
+        //         if(oddc == k){
+        //             count++;
+        //         }
+        //     }
+        // }
+        // return count;
 
+        //better we can set the l=0 and r=k-1 if we will find the the excat things we will expand the window
+        return atmost(nums,k)-atmost(nums,k-1);
+    }
+};
+
+//leetcode 1358
 
