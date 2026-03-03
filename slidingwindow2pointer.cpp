@@ -634,6 +634,65 @@ public:
     }
 };
 
+
+class Solution {
+public:
+
+    int atMost(vector<int>& nums, int goal){
+        if(goal < 0) return 0;
+
+        int l = 0, sum = 0, count = 0;
+
+        for(int r = 0; r < nums.size(); r++){
+            sum += nums[r];
+
+            while(sum > goal){
+                sum -= nums[l];
+                l++;
+            }
+
+            count += r - l + 1;
+        }
+
+        return count;
+    }
+
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        int n = nums.size();
+        int count = 0;
+        //generate all subraays
+        // for(int i=0;i<n;i++){
+        //     int sum = 0;
+        //     for(int j=i;j<n;j++){
+        //         sum += nums[j];
+        //         if(sum == goal){
+        //             count++;
+        //         }
+        //     }
+        // }
+        // return count;
+
+        // //optimal
+        // int l = 0;
+        // int r = 0;
+        // int sum = 0;
+        // if(goal < 0) return 0;
+        // while(r<nums.size()){
+        //     sum += nums[r];
+        //     while(sum>goal){
+        //         sum -= nums[l];
+        //         l++;
+        //     }
+        //     count += r-l+1;
+        //     r++;
+        // }
+        // return count;
+
+        return atMost(nums, goal) - atMost(nums, goal - 1); //because we need for only goal not less then equal to goal
+    }
+};
+
+
 //leetcode 1248
 
 
