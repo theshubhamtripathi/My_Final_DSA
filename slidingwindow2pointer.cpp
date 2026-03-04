@@ -736,5 +736,56 @@ public:
     }
 };
 
+//leetcode 1582
+class Solution {
+public:
+    int numSpecial(vector<vector<int>>& mat) {
+        
+        // Step 1: Get number of rows and columns
+        int rows = mat.size();
+        int col = mat[0].size();
+        
+        int count = 0;   // This will store final answer
+        
+        // Step 2: Create two arrays
+        // rowcount[i]  → number of 1's in row i
+        // colcount[j]  → number of 1's in column j
+        vector<int> rowcount(rows,0);
+        vector<int> colcount(col,0);
+
+        // Step 3: Count how many 1's are in each row and each column
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<col;j++){
+                if(mat[i][j]==1){
+                    rowcount[i]++;   // increase row count
+                    colcount[j]++;   // increase column count
+                }
+            }
+        }
+
+        // Step 4: Check for special positions
+        // A position is special if:
+        // 1) It contains 1
+        // 2) That row has only one 1
+        // 3) That column has only one 1
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<col;j++){
+                
+                // Skip if current element is 0
+                if(mat[i][j]==0) continue;
+
+                // If row and column both contain exactly one '1'
+                if(rowcount[i] == 1 && colcount[j] == 1){
+                    count++;   // This is a special position
+                }
+            }
+        }
+
+        // Step 5: Return total special positions
+        return count;
+    }
+};
+
+
 //leetcode 1358
 
