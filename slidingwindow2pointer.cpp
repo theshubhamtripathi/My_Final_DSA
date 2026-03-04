@@ -788,4 +788,33 @@ public:
 
 
 //leetcode 1358
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        // int n = s.size();
+        // int count = 0;
+        // for(int i=0;i<n;i++){
+        //     vector<int> hash(3,0);
+        //     for(int j=i;j<n;j++){
+        //         hash[s[j]-'a']++;
+        //         if(hash[0]>0&&hash[1]>0&&hash[2]>0){  //a b c are present atleast once
+        //             count++;
+        //         }
+        //     }
+        // }
+        // return count;
 
+        //better 
+        //with every character there is a substring that ends 
+        int n = s.size();
+        int r = 0;
+        vector<int> hash(3,-1);
+        for(int i=0;i<n;i++){
+            hash[s[i]-'a'] = i; //assigning to index of lastseen
+            if(hash[0]!=-1&&hash[1]!=-1&&hash[2]!=-1){
+                r += 1 + min({hash[0],hash[1],hash[2]}); //{} It creates a temporary list of values.if we want ot use the min we have to use curly braces
+            } 
+        }
+        return r;
+    }
+};
