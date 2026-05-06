@@ -139,3 +139,5 @@ public:
 //ceil = smallest no in the array >=x
 //just implement lower bound to find ceil and floor 
 
+
+//When you use curly braces{}, you are telling the compiler to create a vector containing the specific values you've listed inside {} curly braaces .
