@@ -140,4 +140,107 @@ public:
 //just implement lower bound to find ceil and floor 
 
 
-//When you use curly braces{}, you are telling the compiler to create a vector containing the specific values you've listed inside {} curly braaces .
+//When you use curly braces{}, you are telling the compiler to create a vector containing the specific values you've listed inside {} curly braaces.
+
+//leetcode 34
+class Solution {
+public:
+    int lowerbound(vector<int> &nums, int target){
+        int n = nums.size();
+        int l = 0, h = n - 1;
+        int ansl = n;
+        while(l <= h){
+            int mid = l + (h - l) / 2;
+            if(nums[mid] >= target){
+                ansl = mid;
+                h = mid - 1;
+            } else { // Must be in else
+                l = mid + 1;
+            }
+        }
+        return ansl;
+    }
+
+    int upperbound(vector<int> &nums, int target){
+        int n = nums.size();
+        int l = 0, h = n - 1;
+        int ansu = n;
+        while(l <= h){
+            int mid = l + (h - l) / 2;
+            if(nums[mid] > target){
+                ansu = mid;
+                h = mid - 1;
+            } else { // Must be in else
+                l = mid + 1;
+            }
+        }
+        return ansu;
+    }
+
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int lb = lowerbound(nums, target);
+        
+        // Logical Check: If target is not found
+        // lb == nums.size() means target is larger than all elements
+        // nums[lb] != target means target is missing
+        if (lb == nums.size() || nums[lb] != target) {
+            return {-1, -1};
+        }
+        
+        int ub = upperbound(nums, target);
+        return {lb, ub - 1};
+    }
+};
+
+//by pure binary search 
+class Solution {
+public:
+    int first(vector<int>& nums, int target){
+        int n = nums.size();
+        int h = n-1;
+        int l = 0;
+        int ansf = -1;
+        while(l<=h){
+            int mid = (l+h)/2;
+            if(nums[mid] == target){
+                ansf = mid;
+                h = mid-1;
+            }
+            else if(nums[mid] < target){
+                l = mid+1;
+            }
+            else{
+                h = mid-1;
+            }
+        }
+        return ansf;
+    }
+    int last(vector<int>& nums, int target){
+        int n = nums.size();
+        int h = n-1;
+        int l = 0;
+        int ansl = -1;
+        while(l<=h){
+            int mid = (l+h)/2;
+            if(nums[mid] == target){
+                ansl = mid;
+                l = mid+1;
+            }
+            else if(nums[mid] < target){
+                l = mid+1;
+            }
+            else{
+                h = mid-1;
+            }
+        }
+        return ansl;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int f = first(nums,target);
+        if(f == -1){
+            return {-1,-1};
+        }
+        int l = last(nums,target);
+        return {f,l};
+    }
+};
