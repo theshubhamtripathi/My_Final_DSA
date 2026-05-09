@@ -244,3 +244,6 @@ public:
         return {f,l};
     }
 };
+
+
+//search in a sorted array 1
