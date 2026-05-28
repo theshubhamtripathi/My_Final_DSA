@@ -247,3 +247,37 @@ public:
 
 
 //search in a sorted array 1
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            // 1. Check if mid is the target immediately
+            if (nums[mid] == target) {
+                return mid;
+            }
+
+            // 2. Determine which half is uniformly sorted
+            if (nums[low] <= nums[mid]) {
+                // Left half is sorted
+                if (target >= nums[low] && target < nums[mid]) {
+                    high = mid - 1; // Target is in the left sorted portion
+                } else {
+                    low = mid + 1;  // Target is in the right portion
+                }
+            } else {
+                // Right half is sorted
+                if (target > nums[mid] && target <= nums[high]) {
+                    low = mid + 1;  // Target is in the right sorted portion
+                } else {
+                    high = mid - 1; // Target is in the left portion
+                }
+            }
+        }
+        return -1; // Target not found
+    }
+};
