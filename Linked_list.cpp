@@ -43,8 +43,41 @@ int main() {
 
 So basically whta is understood a linked list consist of a class which store the data and the address ie memeory location of next node if next node is empty then make next as nullptr.
 
-  
+depending on the system memory space used can be different depemnd on 32 bit system or 64 bit system 
 
+Difference:
+Node is the actual object (the house). It contains the real data and takes up a large block of memory.
+Node* is a pointer (the house address). It is just a small 8-byte variable that stores the memory location of where that Node is sitting in RAM.
+
+First elemnt will be alwasy head 
+
+Node* covertarr2ll(vector<int> &arr){
+    Node* head = new Node(arr[0]);
+    Node* mover = head;
+    for(int i=1;i<arr.size();i++){
+        Node* temp = new Node(arr[i]);
+        mover->next = temp;
+        mover = temp;
+    }
+    return head;
+}
+
+Simple traversal
+void printLinkedList(Node* head) {
+    // Start from the head of the list
+    Node* temp = head;
+
+    // Loop until temp reaches the end (nullptr)
+    while (temp != nullptr) {
+        // Process the current node's data
+        cout << temp->data << " -> ";
+        
+        // Move the pointer to the next node
+        temp = temp->next;
+    }
+    
+    cout << "NULL" << endl;
+}
 
 
 
