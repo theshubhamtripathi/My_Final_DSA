@@ -79,9 +79,134 @@ void printLinkedList(Node* head) {
     cout << "NULL" << endl;
 }
 
+Node* removehead(Node* head) {
+    if (head == nullptr) return nullptr; // Use nullptr in modern C++
+    
+    Node* temp = head;
+    head = temp->next; // Move head first
+    delete temp;       // Free the old head
+    
+    return head;
+}
 
+we do Node* temp = head becaue we need head so we keep it safe by making a copy of it and doing all the operation based on that copy
 
+Node* removetail(Node* head){
+    Node* temp = head;
+    if(head == nullptr || head->next == nullptr) return nullptr;
+    while(temp->next->next != nullptr){
+        temp = temp->next;
+    }
+    delete temp->next;
+    temp->next = nullptr;
+    return head;
+}
 
+Node* removeatanyk(Node* head,int k){
+    if(head == nullptr) return head;
+    if(k == 1){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return head;
+    }
+    int c = 0;
+    Node* temp = head;
+    Node* prev = nullptr;
+    while(temp != nullptr){
+        c++;
+        if(k==c){
+            prev->next = prev->next->next;
+            delete temp;
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+
+Node* removeatanyel(Node* head,int el){
+    if(head == nullptr) return head;
+    if(head->data == el){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return head;
+    }
+    
+    Node* temp = head;
+    Node* prev = nullptr;
+    while(temp != nullptr){
+        if(temp->data == el){
+            prev->next = prev->next->next;
+            delete temp;
+            break;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    return head;
+}
+
+Node* inserth(Node* head,int val){
+    Node* temp = new Node(val,head);
+    return temp;
+}
+
+Node* insertattail(Node* head,int val){
+    if(head == nullptr){
+        return new Node(val);
+    }
+    Node* temp = head;
+    while(temp->next != nullptr){
+        temp = temp->next;
+    }
+    Node* newnode = new Node(val);
+    temp->next = newnode;
+    return head;
+}
+
+Node* insertatanyposition(Node* head,int el,int k){
+    if(head == nullptr){
+        if(k==1){
+            return new Node(el);
+        } 
+        else{
+            return head;
+        }
+    }
+    if(k==1) return new Node(el,head);
+    int c = 0;
+    Node* temp = head;
+    while(temp!=nullptr){
+        c++;
+        if(c == k-1){
+            Node* x = new Node(el,temp->next);
+            temp->next = x;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
+
+Node* insertatanyvalue(Node* head,int el,int val){
+    if(head == nullptr){
+        return nullptr;
+    }
+    if(head->data == val) return new Node(el,head);
+    Node* temp = head;
+    while(temp->next!=nullptr){
+        if(temp->next->data == val){
+            Node* x = new Node(el,temp->next);
+            temp->next = x;
+            break;
+        }
+        temp = temp->next;
+    }
+    return head;
+}
 
 
 
