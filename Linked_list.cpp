@@ -233,5 +233,281 @@ public:
 };
 
 
+A Doubly Linked List (DLL) is just like the Singly Linked List you've been working with, but with one major superpower: it can go backward.
+In a Singly Linked List, each node only knows about the next house. In a Doubly Linked List, every node contains two pointers: one for the next house and one for the previous house.
 
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* back; // The new pointer to go backward!
+
+    Node(int data1, Node* next1, Node* back1) {
+        data = data1;
+        next = next1;
+        back = back1;
+    }
+
+    Node(int data1) {
+        data = data1;
+        next = nullptr;
+        back = nullptr;
+    }
+};
+
+Node* convertarrtoll(vector<int> &arr) {
+    if (arr.empty()) return nullptr; // Guard against empty vectors
+
+    Node* head = new Node(arr[0]);
+    Node* prev = head; // Start tracking at the head node
+    
+    // Start loop from 1 because index 0 is already the head
+    for (int i = 1; i < arr.size(); i++) {
+        // 1. Create the new node and point its 'back' to 'prev'
+        Node* temp = new Node(arr[i], nullptr, prev);
+        
+        // 2. CRUCIAL: Tell the previous node to point FORWARD to this new node
+        prev->next = temp; 
+        
+        // 3. Move your tracker forward to sit on the new node for the next round
+        prev = temp; 
+    }
+    
+    return head;
+}
+
+void print(Node* head) { // Changed return type to void
+    Node* temp = head;   // Keep head safe, use temp to walk
+    
+    while(temp != nullptr) {
+        cout << temp->data << " -> ";
+        temp = temp->next; // Move temp forward
+    }
+    cout << "nullptr" << endl; // Make the output look clean
+}
+
+Node* deletehead(Node* head){
+    if(head == nullptr || head->next == nullptr) return nullptr;
+    Node* prev = head;
+    head = head->next;
+    head->back = nullptr;
+    prev->next = nullptr;
+    delete(prev);
+    return head;
+}
+
+Node* deletetail(Node* head){
+    if(head == nullptr || head->next == nullptr) return nullptr;
+    Node* tail = head;
+    while(tail->next != nullptr){
+        tail = tail->next;
+    }
+    Node* newtail = tail->back;
+    newtail->next = nullptr;
+    tail->back = nullptr;
+    delete tail;
+    return head;
+}
+
+Node* deleteatanyk(Node* head, int k){
+    if(head == nullptr) return nullptr;
+    
+    Node* temp = head;
+    int c = 0;
+    while(temp != nullptr){
+        c++;
+        if(k == c) break;
+        temp = temp->next;
+    }
+
+    // Guard Clause: If k is greater than the size of the list, do nothing
+    if(temp == nullptr) return head;
+
+    // Identify neighbors using your beautiful strategy
+    Node* prev = temp->back;
+    Node* front = temp->next;
+
+    // Case 1: The list has only 1 node and it matches k
+    if(prev == nullptr && front == nullptr){
+        delete temp;
+        return nullptr;
+    }
+
+    // Case 2: It is the head node (k == 1)
+    else if(prev == nullptr){  
+        Node* oldHead = head; // Fixed: Unique variable name
+        head = head->next;
+        oldHead->next = nullptr;
+        head->back = nullptr;
+        delete oldHead;
+        return head;
+    }
+
+    // Case 3: It is the tail node
+    else if(front == nullptr){  
+        // Fixed: No loop needed! 'temp' is already the tail!
+        Node* newtail = temp->back;
+        newtail->next = nullptr;
+        temp->back = nullptr;
+        delete temp;
+        return head; // Fixed: Corrected 'rteurn' typo
+    }
+
+    // Case 4: It is a middle node
+    prev->next = front;
+    front->back = prev;
+
+    temp->next = nullptr;
+    temp->back = nullptr;
+    delete temp;
+    
+    return head;
+}
+
+void deleteNode(NOde* temp){
+    Node* prev = temp->back;
+    Node* front = temp->next;
+
+    if(front == nullptr){
+        prev->next = nullptr;
+        temp->back = nullptr;
+
+        delete temp;
+        return;
+    }
+
+    prev->next = front;
+    front->back = prev;
+
+    temp->next = temp->back = nullptr;
+    delete temp;
+}
+
+Node* insertnewhead(Node* head, int val){
+    // Edge Case: If the list is empty, the new node becomes the head and has no neighbors
+    if (head == nullptr) {
+        return new Node(val); // creates a standalone node (next=nullptr, back=nullptr)
+    }
+
+    // Standard Case (Your brilliant logic)
+    Node* newhead = new Node(val, head, nullptr);
+    head->back = newhead; // Safely link the old head backward to our new head
+    
+    return newhead;
+}
+
+Node* insertnewnodebeforetail(Node* head;int val){
+    if(head == nullptr){
+        Node* newhead = new Node(val,head,nullptr);
+        head->back = newhead;
+        return newhead;
+    }
+    Node* temp = head;
+    while(temp->next != nullptr){
+        temp = temp->next;
+    }
+    Node* prev = tail->back;
+    Node* newnode = new Node(val,tail,prev);
+    tail->back = newnode;
+    prev->next = newnode;
+    return head;
+}
+
+Node* insertbeforeanyk(int val, int k, Node* head){
+    // Edge Case 1: Empty List
+    if (head == nullptr) {
+        if (k == 1) return new Node(val);
+        return nullptr;
+    }
+
+    // Case 1: Insert before the head (k == 1) - Handled using your safe logic
+    if(k == 1){
+        Node* newNode = new Node(val, head, nullptr);
+        head->back = newNode;
+        return newNode; // Correct: Returning the brand-new head
+    }
+
+    // Step 2: Traverse to find the k-th node
+    Node* temp = head;
+    int c = 0;
+    while(temp != nullptr){
+        c++;
+        if(k == c) break;
+        temp = temp->next;
+    }
+
+    // Guard Clause: If k is out of bounds (greater than list length), do nothing
+    if(temp == nullptr) return head;
+
+    // Case 2: Standard Middle/Tail Insertion (Your beautiful layout fixed)
+    Node* prev = temp->back;
+    Node* nodei = new Node(val, temp, prev);
+    
+    prev->next = nodei;  // Link previous node forward to the new node
+    temp->back = nodei;  // Link target node backward to the new node
+    
+    return head; // Correct: Keep the list entry point intact!
+}
+
+void inseratagivennode(Node* node,int val){
+    Node* prev=node->back;
+    Node* newnode  = new Node(val,node,prev);
+    prev->next = newnode;
+    node->back = newnode;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
