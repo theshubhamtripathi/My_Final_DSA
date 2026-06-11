@@ -457,7 +457,19 @@ void inseratagivennode(Node* node,int val){
 }
 
 
-
+Node* reverseDLL(Node* head){
+    if(head == nullptr || head->next == nullptr){
+        return head;
+    }
+    Node* prev = nullptr;
+    Node* curr = head;
+    while(curr != nullptr){
+        prev = curr->prev;
+        curr->prev = curr->next;
+        curr->next = prev
+    }
+    curr = curr->prev;
+}
 
 
 
