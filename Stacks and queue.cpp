@@ -416,3 +416,48 @@ int main() {
 
     return 0;
 }
+
+Leetcode 20 valid parenthesis 
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+
+        for (int i = 0; i < s.length(); i++) {
+            char current = s[i];
+
+            if (current == '(' || current == '{' || current == '[') {
+                st.push(current);
+            }
+            else {
+                if (st.empty()) {
+                    return false;
+                }
+
+                char ch = st.top();
+                st.pop();
+
+                if (current == ')' && ch == '(') {
+                    continue;
+                }
+                else if (current == '}' && ch == '{') {
+                    continue;
+                }
+                else if (current == ']' && ch == '[') {
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+
+        if (st.empty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+};
+
