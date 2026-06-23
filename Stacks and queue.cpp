@@ -516,3 +516,210 @@ public:
         return mini;
     }
 };
+
+Prefix, Infix, and Postfix Conversion 
+
+1. What is an Operand?
+An Operand is the actual data or value in the expression. It is the object that is being modified, counted, or calculated.
+ 
+2. What is an Operator?
+An Operator is the symbol that tells you what mathematical action or operation to perform on the operands.    
+
+Infix: The operator sits inside (between) the operands (e.g., A + B). This is how humans write math.
+Prefix: The operator sits before (pre) the operands (e.g., + A B).
+Postfix: The operator sits after (post) the operands (e.g., A B +).    
+
+Infix to postfix conversion :
+
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+int getPriority(char ch) {
+    if (ch == '^') {
+        return 3;
+    }
+    else if (ch == '*' || ch == '/') {
+        return 2;
+    }
+    else if (ch == '+' || ch == '-') {
+        return 1;
+    }
+    return 0;
+}
+
+string infixToPostfix(string s) {
+    stack<char> st;
+    string result = "";
+
+    for (int i = 0; i < s.length(); i++) {
+        char current = s[i];
+
+        if ((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z') || (current >= '0' && current <= '9')) {
+            result = result + current;
+        }
+        else if (current == '(') {
+            st.push(current);
+        }
+        else if (current == ')') {
+            while (!st.empty() && st.top() != '(') {
+                result = result + st.top();
+                st.pop();
+            }
+            if (!st.empty()) {
+                st.pop();
+            }
+        }
+        else {
+            while (!st.empty() && getPriority(current) <= getPriority(st.top())) {
+                result = result + st.top();
+                st.pop();
+            }
+            st.push(current);
+        }
+    }
+
+    while (!st.empty()) {
+        result = result + st.top();
+        st.pop();
+    }
+
+    return result;
+}
+
+int main() {
+    string infix = "a+b*(c^d-e)^(f+g*h)-i";
+    cout << "Postfix expression: " << infixToPostfix(infix) << endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
