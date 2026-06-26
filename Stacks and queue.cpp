@@ -595,7 +595,9 @@ int main() {
 }
 
 Infix to prefix :
-
+1.) Reverse the infix
+2.) Infix to postfix
+3.) Reverse that answer 
 
 
 
