@@ -599,6 +599,108 @@ Infix to prefix :
 2.) Infix to postfix
 3.) Reverse that answer 
 
+#include <iostream>
+#include <stack>
+#include <string>
+#include <algorithm> // Used for reversing strings
+
+using namespace std;
+
+// Helper function to define operator precedence
+int getPriority(char ch) {
+    if (ch == '^') {
+        return 3;
+    }
+    else if (ch == '*' || ch == '/') {
+        return 2;
+    }
+    else if (ch == '+' || ch == '-') {
+        return 1;
+    }
+    return 0;
+}
+
+// Standard Infix to Postfix conversion logic
+string infixToPostfix(string s) {
+    stack<char> st;
+    string result = "";
+
+    for (int i = 0; i < s.length(); i++) {
+        char current = s[i];
+
+        // If character is an operand, add it to output
+        if ((current >= 'a' && current <= 'z') || (current >= 'A' && current <= 'Z') || (current >= '0' && current <= '9')) {
+            result += current;
+        }
+        // If character is '(', push it to stack
+        else if (current == '(') {
+            st.push(current);
+        }
+        // If character is ')', pop and output until '(' is found
+        else if (current == ')') {
+            while (!st.empty() && st.top() != '(') {
+                result += st.top();
+                st.pop();
+            }
+            if (!st.empty()) {
+                st.pop(); // Remove '(' from stack
+            }
+        }
+        // If an operator is encountered
+        else {
+            while (!st.empty() && getPriority(current) <= getPriority(st.top())) {
+                // Special handling for right-associative operator '^'
+                if (current == '^' && st.top() == '^') {
+                    break; 
+                }
+                result += st.top();
+                st.pop();
+            }
+            st.push(current);
+        }
+    }
+
+    // Pop all remaining operators from the stack
+    while (!st.empty()) {
+        result += st.top();
+        st.pop();
+    }
+
+    return result;
+}
+
+// Core function to convert Infix to Prefix
+string infixToPrefix(string infix) {
+    // Step 1: Reverse the infix expression
+    reverse(infix.begin(), infix.end());
+
+    // Step 2: Swap opening and closing parentheses
+    for (int i = 0; i < infix.length(); i++) {
+        if (infix[i] == '(') {
+            infix[i] = ')';
+        }
+        else if (infix[i] == ')') {
+            infix[i] = '(';
+        }
+    }
+
+    // Step 3: Get the postfix of the modified reversed expression
+    string postfix = infixToPostfix(infix);
+
+    // Step 4: Reverse the postfix result to get the final prefix expression
+    reverse(postfix.begin(), postfix.end());
+
+    return postfix;
+}
+
+int main() {
+    string infix = "a+b*(c^d-e)^(f+g*h)-i";
+    
+    cout << "Infix Expression:  " << infix << endl;
+    cout << "Prefix Expression: " << infixToPrefix(infix) << endl;
+    
+    return 0;
+}
 
 
 
