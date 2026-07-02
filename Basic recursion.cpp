@@ -38,3 +38,19 @@ int myAtoi(string s, int i = 0) {
     return helper(s, i, 0, sign);
 }
 };
+
+Leetcode 50
+class Solution {
+public:
+
+    double solve(double x,long n){
+        if(n == 0) return 1;
+        if(n < 0) return solve(1/x,-n); //mandatoryly we have to use long here else out off bound issue is there 
+        if(n%2 == 0) return solve(x*x,n/2);
+        else return x*solve(x*x,(n-1)/2);
+    }
+    double myPow(double x, int n) {
+        return solve(x,(long)n);
+    }
+};
+
