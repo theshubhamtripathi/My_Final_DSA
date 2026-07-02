@@ -54,3 +54,44 @@ public:
     }
 };
 
+to find total number of even indices in a array of n size it is (n+1)/2 while the odd one is just n/2
+leetcode 1922
+class Solution {
+public:
+    // Define the modulo constant as required by the problem statement (10^9 + 7)
+    const int M = 1e9 + 7;
+
+    // Recursive helper function for Binary Exponentiation O(log exp)
+    long long power(long long base, long long exp){
+        // Base Case: Any number raised to the power of 0 is 1
+        if(exp == 0) return 1;
+        
+        // If the exponent is even: Transform base to (base^2) and cut exponent in half
+        if(exp % 2 == 0) {
+            return power((base * base) % M, exp / 2);
+        }
+        // If the exponent is odd: Pull one base out, and reduce the remaining exponent by 1/2
+        else {
+            return (base * power((base * base) % M, (exp - 1) / 2)) % M;
+        }
+    }
+
+    int countGoodNumbers(long long n) {
+        // Use long long to prevent integer overflow since n can be up to 10^15
+        // Calculate total slots at even positions (0, 2, 4...) using ceiling division formula
+        long long even = (n + 1) / 2;
+        
+        // Calculate total slots at odd positions (1, 3, 5...) using floor division formula
+        long long odd = n / 2;
+
+        // Calculate total combinations for even positions (5 choices: 0, 2, 4, 6, 8)
+        long long ev = power(5, even);
+        
+        // Calculate total combinations for odd positions (4 choices: 2, 3, 5, 7)
+        long long ov = power(4, odd);
+
+        // Combine both choices using the slot multiplication rule and apply final modulo
+        return (ev * ov) % M;
+    }
+};    
+    
