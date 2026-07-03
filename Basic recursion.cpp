@@ -1,3 +1,111 @@
+What is recursion ? When a fuction calls itself until a specified condition is met(base condition).
+First the main function gets called.
+ #include <bits/stdc++.h>
+using namespace std;
+
+int cnt = 0;
+
+void print() {
+    if (cnt == 3) return; //base condition
+    
+    cout << cnt << endl;
+    cnt++;
+    print();
+}
+
+int main() {
+    print();
+    return 0;
+}
+    //if we dont give a base condiition then it will go for infinite loop resulting in stack overflow and fillfulment of stack memory.
+Printing name till n times
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(int i,int n) {
+    if (i>n) return; //base condition
+    cout <<"st"<< endl;
+    print(i+1,n);
+}
+
+int main() {
+    int n;
+    cin>>n;
+    print(1,n);
+    return 0;
+}
+
+Print linearly from 1 to n
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(int i,int n) {
+    if (i>n) return; //base condition
+    cout <<i<< endl;
+    print(i+1,n);
+}
+
+int main() {
+    int n;
+    cin>>n;
+    print(1,n);
+    return 0;
+}
+
+Print linearly from n to 1
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(int n) {
+    if (n==0) return; //base condition
+    cout<<n<<endl;
+    print(n-1);
+}
+
+int main() {
+    int n;
+    cin>>n;
+    print(n);
+    return 0;
+}
+//by back tracking
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(int i, int n) {
+    if (i > n) return;
+    
+    print(i + 1, n);
+    cout << i << endl;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    print(1, n);
+    return 0;
+}
+//Right now, your code prints n before it calls the next function (Forward Tracking).
+What if an interviewer challenges you to print from 1 to n, but gives you a strict rule: You are NOT allowed to use i+1 or addition anywhere in the function parameters?
+You solve that by printing after the recursive call. Here is how that look-behind execution works:
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(int n) {
+    if (n == 0) return;
+    
+    print(n - 1);
+    cout << n << endl;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    print(n);
+    return 0;
+}
+Notice how this prints 1 to n even though we are subtracting n - 1? This happens because the cout statement waits on the call stack until the recursion hits 0, and then prints as the stack unfolds backwards.
+
 
 Leetcode 8
 class Solution {
