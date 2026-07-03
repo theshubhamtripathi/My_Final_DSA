@@ -106,6 +106,62 @@ int main() {
 }
 Notice how this prints 1 to n even though we are subtracting n - 1? This happens because the cout statement waits on the call stack until the recursion hits 0, and then prints as the stack unfolds backwards.
 
+ //parameterised recursion sum of n numbers from 1
+#include <bits/stdc++.h>
+using namespace std;
+
+void func(int i, int sum) {
+    if (i < 1) {
+        cout << sum << endl;
+        return;
+    }
+    func(i - 1, sum + i);
+}
+
+int main() {
+    func(3, 0);
+    return 0;
+}
+//in functional recursion you want the function you give you something and that is use in dp
+//Same question using functional recursion
+//In parametericed the parametres are passed and in functional direct n that is we use the function only 
+#include <bits/stdc++.h>
+using namespace std;
+
+int func(int n) {
+    if (n == 0) return 0;
+    return n + func(n - 1);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << func(n) << endl;
+    return 0;
+}
+
+// Factorial of a number n
+#include <bits/stdc++.h>
+using namespace std;
+
+int fact(int n) {
+    // Base case: 0! is 1, and 1! is 1
+    if (n <= 1) {
+        return 1;
+    }
+    // Recursive case
+    return n * fact(n - 1);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    // Fixed: Added cout to actually display the result
+    cout << fact(n) << endl; 
+    
+    return 0;
+}
 
 Leetcode 8
 class Solution {
