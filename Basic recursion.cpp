@@ -163,6 +163,84 @@ int main() {
     return 0;
 }
 
+// Functional recursion example 
+// Reverse an array using recursion (2 pointers)
+#include <bits/stdc++.h>
+using namespace std;
+
+// Fixed: Passed the vector by reference (&a) so the function can modify it
+void func(int l, int r, vector<int> &a) {
+    if (l >= r) {
+        return;
+    }
+    swap(a[l], a[r]);
+    
+    // Fixed: Changed 'i' to 'l' and fixed the semicolon to a comma
+    func(l + 1, r - 1, a); 
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    int l = 0;
+    int r = n - 1;
+    
+    // Fixed: Passed 'a' into the function
+    func(l, r, a);
+    
+    // Added: Print the reversed array
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+// Reversing an array using functional recursion (Single Pointer)
+#include <bits/stdc++.h>
+using namespace std;
+
+void func(int i, vector<int> &a) {
+    int n = a.size();
+    
+    // Base case: Stop when we reach or cross the middle of the array
+    if (i >= n / 2) {
+        return;
+    }
+    
+    // Swap the current element with its mirror element on the right side
+    swap(a[i], a[n - i - 1]);
+    
+    // Recursive call: Move to the next index
+    func(i + 1, a); 
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    // Start recursion from index 0
+    func(0, a);
+    
+    // Print the reversed array
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
 Leetcode 8
 class Solution {
 public:
