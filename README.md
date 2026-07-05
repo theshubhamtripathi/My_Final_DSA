@@ -6,5 +6,5 @@ Organized by topic: arrays, strings, trees, dynamic programming, and more
 Daily C++ code, concise notes, and real problem explanations
 Links to tough problems and reference resources
 Open to collaboration—raise an issue or connect via [LinkedIn](https://www.linkedin.com/in/theshubhamtripathi/).
-Commit by commit, building stronger DSA skills in C++ each day.
+Commit by commit, building stronger DSA skills in C++ each day...
 
