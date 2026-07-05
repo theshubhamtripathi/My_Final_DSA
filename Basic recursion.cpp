@@ -241,6 +241,46 @@ int main() {
     return 0;
 }
 
+
+//To check whether a string is palindrome or not 
+#include <bits/stdc++.h>
+using namespace std;
+
+// Changed return type to bool. Passed string by reference (&s) to avoid copying.
+bool isPalindrome(int i, const string &s) {
+    int n = s.length();
+    
+    // Base Case: If we've reached or passed the middle, it's a palindrome
+    if (i >= n / 2) {
+        return true;
+    }
+    
+    // If characters at symmetric positions don't match, it's not a palindrome
+    if (s[i] != s[n - i - 1]) {
+        return false;
+    }
+    
+    // Recursive call: Move to the next character (i + 1)
+    return isPalindrome(i + 1, s);
+}
+
+int main() {
+    string s;
+    cout << "Enter a string: ";
+    cin >> s;
+    
+    // Start checking from index 0
+    if (isPalindrome(0, s)) {
+        cout << s << " is a palindrome." << endl;
+    } else {
+        cout << s << " is not a palindrome." << endl;
+    }
+    
+    return 0;
+}
+
+
+
 Leetcode 8
 class Solution {
 public:
