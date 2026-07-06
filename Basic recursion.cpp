@@ -279,6 +279,30 @@ int main() {
     return 0;
 }
 
+//Multiple recursion calls 
+fibonacci using iteration is very easy we just use f(0) and a f(1) then we will iterate the for loop from for(int i=2;i<n;i++) and we will make f(i) = f(i-1) + f(i-2)
+if multiple recursion calls are happeing so one function after function things will be done on a function by function basis. one by one
+#include<bits/stdc++.h>
+using namespace std;
+
+int func(int n){
+    if(n <= 1) return n;
+    // Fixed: Changed 'f' to 'func' to match the function name
+    return func(n-1) + func(n-2); 
+}
+
+int main(){
+    cout << func(4); // Output will be 3
+    return 0;
+}
+
+TC : O(2^n) exponential 
+
+
+
+
+
+
 
 
 Leetcode 8
