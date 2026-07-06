@@ -298,7 +298,42 @@ int main(){
 
 TC : O(2^n) exponential 
 
+ //by recursion we have to find total number of subsequences
+ Pick or Not pick vvvimp concept 
+#include <bits/stdc++.h>
+using namespace std;
 
+// 'idx' tracks our current position in the array
+// 'current' acts as our temporary "bag" holding the elements we've chosen
+void printSubsequences(int idx, vector<int> &current, vector<int> &arr) {
+    // BASE CASE: If we have made a decision for all elements
+    if (idx == arr.size()) {
+        cout << "[ ";
+        for (int x : current) cout << x << " ";
+        cout << "]" << endl;
+        return;
+    }
+
+    // CHOICE 1: TAKE the element at 'idx'
+    current.push_back(arr[idx]); 
+    printSubsequences(idx + 1, current, arr); // Move to next element
+    
+    // BACKTRACK: Remove the element we just took so we can explore "DON'T TAKE"
+    current.pop_back(); 
+
+    // CHOICE 2: DON'T TAKE the element at 'idx'
+    printSubsequences(idx + 1, current, arr); // Move to next element
+}
+
+int main() {
+    vector<int> arr = {1, 2}; // Simple array for a clear dry run
+    vector<int> current;      // Our empty bag
+    
+    // Start recursion from index 0
+    printSubsequences(0, current, arr);
+    
+    return 0;
+}
 
 
 
