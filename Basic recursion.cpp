@@ -305,6 +305,7 @@ using namespace std;
 
 // 'idx' tracks our current position in the array
 // 'current' acts as our temporary "bag" holding the elements we've chosen
+
 void printSubsequences(int idx, vector<int> &current, vector<int> &arr) {
     // BASE CASE: If we have made a decision for all elements
     if (idx == arr.size()) {
@@ -335,10 +336,43 @@ int main() {
     return 0;
 }
 
+//Printing subsequnces whose sum is k
+#include<bits/stdc++.h>
+using namespace std;
+void printingsubseq(int idx,vector<int> &current,int s,int k,vector<int> &arr){
+ if(idx == arr.size()){  //base condition
+  if(s == k){
+   cout<<"[ ";
+   for(int x:current) cout<<x<<" ";
+   cout<<" ]"<<endl;
+  }
+  return;
+ }
 
+ //if we are taking 
+ current.push_back(arr[idx]);
+ s += arr[idx];
+ printingsubseq(idx + 1,current,s,k,arr);
 
+ //remeber when u go to mall to try a shirt to wear a new one you have to remove the shirt what you are wearing then try the new one.
+ s -= arr[idx];
+ current.pop_back();
 
+ //if no taking
+ printingsubseq(idx + 1,current,s,k,arr);
+}
+int main(){
+ int k;
+ cin>>k;
 
+ vector<int> arr = {1, 2, 1}; // Simple array example
+ vector<int> current;
+
+ cout << "Subsequences with sum " << k << ":" << endl;
+    // Start at index 0, with a running sum of 0
+ printingsubseq(0, current, 0, k, arr);
+ return 0;
+}
 
 Leetcode 8
 class Solution {
