@@ -457,3 +457,92 @@ public:
         return -1;
 
 //for multipeak
+
+
+//Binary search on answers 
+//KOKO Eating bananas Leetcode 875
+whenever we have a range(in sorted order) and there we know the whether the number should fall on the selected or non selected part we can use the binary search in answers 
+whenver we have to find the min answer we have to apply binary search on answers for that we have to know a range and the answer always lies in beteen 
+
+class Solution {
+public:
+    bool caneatall(vector<int> &piles, int mid, int h){
+        // Bug Fix 3: Changed to long long to prevent integer overflow
+        long long actualhours = 0; 
+        
+        for(int i = 0; i < piles.size(); i++){
+            // Bug Fix 2: Used pure integer math formula for ceiling division
+            actualhours += (piles[i] + mid - 1) / mid;
+        }
+        return (actualhours <= h);
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) {
+       // Bug Fix 1: Changed starting speed 'l' from 0 to 1 to avoid division by zero
+       int l = 1; 
+       int r = *max_element(piles.begin(), piles.end());
+       
+       while(l < r){
+            int mid = l + (r - l) / 2;
+            if(caneatall(piles, mid, h)){
+                r = mid; 
+            }
+            else{
+                l = mid + 1;
+            }
+       }
+       return l;
+    }
+};
+
+//leetcode 1011
+One thing we figured out the answer lies between the max weight and the summation of all the weights.
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    // Helper function: Checks if a given capacity 'mid' can ship everything within 'days'
+    bool canShipWithCapacity(vector<int>& weights, int mid, int days) {
+        int daysNeeded = 1; // Start on Day 1
+        int currentLoad = 0;
+
+        for (int i = 0; i < weights.size(); i++) {
+            // If adding this package keeps us within capacity, load it up!
+            if (currentLoad + weights[i] <= mid) {
+                currentLoad += weights[i];
+            } 
+            // Otherwise, this ship is full for the day. Send it off!
+            else {
+                daysNeeded++;          // Move to the next day
+                currentLoad = weights[i]; // Start the new day's load with this package
+            }
+        }
+
+        // Return true if the total days taken is less than or equal to allowed days
+        return (daysNeeded <= days);
+    }
+
+    int shipWithinDays(vector<int>& weights, int days) {
+        int l = 0; // Will store the max element
+        int r = 0; // Will store the total sum
+        
+        for (int i = 0; i < weights.size(); i++) {
+            l = max(l, weights[i]); // Ship must hold at least the heaviest package
+            r += weights[i];        // Max limit is putting everything on one ship
+        }
+
+        // Binary search on the answer range [l, r]
+        while (l < r) {
+            int mid = l + (r - l) / 2; // Trial capacity
+
+            if (canShipWithCapacity(weights, mid, days)) {
+                r = mid; // This capacity works, but let's see if we can go smaller
+            } else {
+                l = mid + 1; // Too small! We need a stronger ship
+            }
+        }
+
+        return l; // 'l' will converge to the minimum optimal capacity
+    }
+};
