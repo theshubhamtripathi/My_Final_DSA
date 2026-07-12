@@ -94,3 +94,83 @@ public:
         return solve(n,dp);
     }
 };  
+
+//The exact difeernece btwenn greedy and dp 
+The most important difference is that greedy algorithms make a locally optimal choice at each step and never reconsider or backtrack, whereas dynamic programming (DP) solves overlapping subproblems, stores their results, and explores all possible combinations to guarantee a globally optimal solution.
+
+//Frog jump with k distances 
+whenevr u see total count or all possible ways make a map in your mid of creating and implementing recursion.
+why greedy fails here :
+1.) First if in the question it asks find all the steps and all possible ways it just hints us to do recursion
+2.) Express the porblem in the terms of index 
+3.) Do all the stuffs on that index 
+
+Problem Statement: Given a number of stairs and a frog, the frog wants to climb from the 0th stair to the (N-1)th stair. At a time the frog can climb either one or two steps. A height[N] array is also given. Whenever the frog jumps from a stair i to stair j, the energy consumed in the jump is abs(height[i]- height[j]), where abs() means the absolute difference. We need to return the minimum energy that can be used by the frog to jump from stair 0 to stair N-1..
+
+//memoization solution
+#include <bits/stdc++.h>
+using namespace std;
+
+int func(int idx, vector<int>& a, vector<int>& dp) {
+    if (idx == 0) return 0;
+    
+    if (dp[idx] != -1) return dp[idx];
+    
+    int left = func(idx - 1, a, dp) + abs(a[idx] - a[idx - 1]);
+    
+    int right = INT_MAX;
+    if (idx > 1) {
+        right = func(idx - 2, a, dp) + abs(a[idx] - a[idx - 2]);
+    }
+    
+    return dp[idx] = min(left, right);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    vector<int> dp(n, -1);
+    cout << func(n - 1, a, dp) << endl;
+    return 0;
+}
+
+//Tabulation solution 
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    vector<int> dp(n, 0);
+    dp[0] = 0;
+    
+    for (int i = 1; i < n; i++) {
+        int left = dp[i - 1] + abs(a[i] - a[i - 1]);
+        
+        int right = INT_MAX;
+        if (i > 1) {
+            right = dp[i - 2] + abs(a[i] - a[i - 2]);
+        }
+        
+        dp[i] = min(left, right);
+    }
+    
+    cout << dp[n - 1] << endl;
+    return 0;
+}
+
+
+
+  
