@@ -471,7 +471,54 @@ Node* reverseDLL(Node* head){
     curr = curr->prev;
 }
 
+//Find middle element in a linked list 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
 
+        //Optimal sol
+
+        // ListNode* temp = head;
+        // int c = 0;
+        // while(temp != nullptr){
+        //     c++;
+        //     temp = temp->next;
+        // }
+        // int midnode = (c/2) + 1;  //formula to find middle element
+        // temp = head;
+        // while(temp != nullptr){
+        //     midnode -= 1;
+        //     if(midnode == 0){
+        //         break;
+        //     }
+        //     temp = temp->next;
+        // }
+        // return temp;
+
+        //Tortoise and Hare problem here we movw the pointer one pointer fast and another dolw similatneously
+        //In odd number linked list the fast pointer will go to last element 
+        //In even number linked list it will go to the null pointer 
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+};
 
 
 
