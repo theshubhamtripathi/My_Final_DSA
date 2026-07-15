@@ -171,6 +171,62 @@ int main() {
     return 0;
 }
 
+//House robber 
+class Solution {
+public:
+    int solve(int idx,vector<int>& dp,vector<int>& nums){
+        if(idx == 0){
+            return nums[0];
+        }
+        if(idx < 0) return 0;
+        else if(dp[idx] != -1) return dp[idx];
+
+        int take = nums[idx] + solve(idx - 2,dp,nums);
+        int leave = solve(idx-1,dp,nums);
+
+        return dp[idx] = max(take,leave);
+    }
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n+1,-1);
+        return solve(n-1,dp,nums);
+    }
+};
+
+// House RObber ||
+class Solution {
+public:
+    int solve(int idx,vector<int>& nums,vector<int>& dp){
+        if(idx == 0) return nums[idx];
+        if(idx<0) return 0;
+        else if(dp[idx] != -1) return dp[idx];
+
+        int take = nums[idx] + solve(idx-2,nums,dp);
+        int leave = solve(idx-1,nums,dp);
+
+        return dp[idx] = max(take,leave);
+    }
+    int rob(vector<int>& nums) {
+        int n =  nums.size();
+        if(n == 1) return nums[0];
+        vector<int> dp(n+1,-1);
+        vector<int> dp1(n+1,-1);
+        vector<int> temp;
+        vector<int> temp1;
+
+        for(int i=0;i<n;i++){
+            if(i != 0){
+                temp.push_back(nums[i]);
+            } 
+            if(i != n-1){
+                temp1.push_back(nums[i]);
+            }
+        }
+        return max(solve(n-2,temp,dp),solve(n-2,temp1,dp1));
+    }
+};
+
+//DP on 2-D Ninja Training 
 
 
 
