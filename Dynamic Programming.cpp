@@ -226,8 +226,91 @@ public:
     }
 };
 
-/// DP on 2-D Ninja Training 
+// DP on 2-D Ninja Training 
 
+see in some questions you have to consider some more parametres as we need one extra variable in this to tell us the last things so we took extra parameter here 
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    // Recursive helper function with 2D DP memory array
+    int solve(int day, int last, vector<vector<int>>& points, vector<vector<int>>& dp) {
+        // Base Case: When we reach Day 0, we simply pick the maximum points possible
+        if (day == 0) {
+            int maxi = 0;
+            for (int i = 0; i < 3; i++) {
+                // We cannot pick the activity that matches 'last'
+                if (i != last) {
+                    maxi = max(maxi, points[0][i]);
+                }
+            }
+            return maxi;
+        }
+
+        // If this exact day and last-activity restriction was calculated before, return it
+        if (dp[day][last] != -1) return dp[day][last];
+
+        int maxi = 0;
+        // Loop through all 3 possible activities for the current day
+        for (int i = 0; i < 3; i++) {
+            if (i != last) {
+                // Points earned today + delegate the remaining days to the recursive call
+                int activityPoints = points[day][i] + solve(day - 1, i, points, dp);
+                maxi = max(maxi, activityPoints);
+            }
+        }
+
+        // Save our maximum result in the 2D DP matrix before returning
+        return dp[day][last] = maxi;
+    }
+
+    int ninjaTraining(int n, vector<vector<int>>& points) {
+        // Create a 2D DP vector of size N x 4 (since 'last' can range from 0 to 3)
+        vector<vector<int>> dp(n, vector<int>(4, -1));
+        
+        // Start from the last day (n-1) with a dummy restriction value of 3 (no restriction yet)
+        return solve(n - 1, 3, points, dp);
+    }
+};
+
+//Tabluation 
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int ninjaTraining(int n, vector<vector<int>>& points) {
+        // Create a 2D DP matrix initialized to 0
+        vector<vector<int>> dp(n, vector<int>(4, 0));
+
+        // Base Case Initialization: Fill out the values for Day 0 manually
+        dp[0][0] = max(points[0][1], points[0][2]); // If activity 0 is restricted, pick max of 1 and 2
+        dp[0][1] = max(points[0][0], points[0][2]); // If activity 1 is restricted, pick max of 0 and 2
+        dp[0][2] = max(points[0][0], points[0][1]); // If activity 2 is restricted, pick max of 0 and 1
+        dp[0][3] = max({points[0][0], points[0][1], points[0][2]}); // If no restriction, pick max of all three
+
+        // Loop through all remaining days from Day 1 up to Day N-1
+        for (int day = 1; day < n; day++) {
+            // Pre-calculate the result for every possible restriction state (0 to 3)
+            for (int last = 0; last < 4; last++) {
+                dp[day][last] = 0;
+                
+                // Try performing each activity 'i' on the current day
+                for (int i = 0; i < 3; i++) {
+                    if (i != last) {
+                        // Current day points + the best score from the previous day given restriction 'i'
+                        int currentPoints = points[day][i] + dp[day - 1][i];
+                        dp[day][last] = max(dp[day][last], currentPoints);
+                    }
+                }
+            }
+        }
+
+        // The final maximum answer will be stored on the last day with no initial restriction (3)
+        return dp[n - 1][3];
+    }
+};
 
 
 
