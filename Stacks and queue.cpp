@@ -823,9 +823,61 @@ public:
  * bool param_4 = obj->empty();
  */
 
+//When we start saving elemnt in stack in a specific order that is called monotonic stack (like in a specific order)
+//Brute Force
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> ans;
+        for(int i=0;i<nums1.size();i++){
+            int idx = -1;
+            for(int j=0;j<nums2.size();j++){
+                if(nums1[i] == nums2[j]){
+                    idx = j;
+                    break;
+                }
+            }
+            int greatere = -1;
+            for(int k=idx+1;k<nums2.size();k++){
+                if(nums2[k]>nums2[idx]){
+                    greatere = nums2[k];
+                    break;
+                }
+            }
+            ans.push_back(greatere);
+        }
+        return ans;
+    }
+};
 
+//Optimal monotonic stack 
+vector<int> ans;
+        for (int i = 0; i < nums1.size(); i++) {
+            stack<int> st;
+            
+            // Iterate nums2 from right to left (Fix #1: use j instead of i)
+            for (int j = nums2.size() - 1; j >= 0; j--) {
+                
+                // Fix #3: use <= for strictly greater
+                while (!st.empty() && st.top() <= nums2[j]) {
+                    st.pop();
+                }
 
+                // If we match the element from nums1
+                if (nums1[i] == nums2[j]) {
+                    if (st.empty()) {
+                        ans.push_back(-1);
+                    } else {
+                        ans.push_back(st.top());
+                    }
+                    break; // Stop scanning once found
+                }
 
+                // Fix #4: Push current element so it's available for elements to its left
+                st.push(nums2[j]);
+            }
+        }
+        return ans;
 
 
 
