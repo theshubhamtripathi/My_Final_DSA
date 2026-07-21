@@ -868,3 +868,28 @@ public:
     }
 };
 
+
+//Leetcode 209
+if in any question if words like contiguous comes then there is a probability that it will be made using sliding window
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int n = nums.size();
+        int sum = 0;
+
+        int i = 0;
+        int j = 0;
+        
+        int minl = INT_MAX;
+        while(j<n){
+            sum += nums[j];
+            while(sum>=target){
+                minl = min(minl,j-i+1);
+                sum -= nums[i];
+                i++;
+            }
+            j++;
+        }
+        return minl == INT_MAX ? 0 : minl;
+    }
+};
