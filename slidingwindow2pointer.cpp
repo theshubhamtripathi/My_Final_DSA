@@ -818,3 +818,53 @@ public:
         return r;
     }
 };
+
+
+//Leetcode 125
+The std::isalnum function in C++ checks if a given character is alphanumeric, meaning it is either a letter or a digit.
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int left = 0;
+        int right = s.length()-1;
+
+        while(left<=right){
+            if(!isalnum(s[left])){
+                left++;
+            }
+            else if(!isalnum(s[right])){
+                right--;
+            }
+            else if(tolower(s[left]) != tolower(s[right])){
+                return false;
+            }
+            else{
+                left++;
+                right--;
+            }
+        }
+        return true;
+    }
+};
+
+//Leetcode 392
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int n = t.size();
+        int idx = 0;
+        for(int i=0;i<n;i++){
+            if(s[idx] == t[i]){  //beacuse aage hi next element aayega ...............
+                idx++;
+            }
+            else{
+                continue;
+            }
+        }
+        if(s.length() == idx)
+            return true;
+
+        return false;    
+    }
+};
+
