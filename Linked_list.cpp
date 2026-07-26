@@ -549,10 +549,58 @@ public:
 whenver we get fast and slow pointer on same index then we can unerstand that their is cycle if nit then by not nay means fast and slow pointer collide in linear linked list
 
 
+//Leetcode 206 reverse a linked list
+//optimal 
+        if(head == nullptr || head->next == nullptr){
+            return head;
+        }
+
+        ListNode* last = reverseList(head->next);  //head will be last
+
+        head->next->next = head;
+        head->next = nullptr;
+        return last;
+    }
 
 
 
+//Leetcode 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        //In this question we have to do nothing just first find one node and add it to the result then just find the next smallest and keep on doing it ...
 
+        if(list1 == nullptr){
+            return list2;
+        }
+        if(list2 == nullptr){
+            return list1;
+        }
+
+        ListNode* r ;
+        if(list1->val < list2->val){
+            r = list1;
+            r->next = mergeTwoLists(list1->next,list2); 
+        }
+        else{
+            r = list2;
+            r->next = mergeTwoLists(list1,list2->next);
+        }
+        return r;
+    }
+};
+
+//Leetcode 19
 
 
 
