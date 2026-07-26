@@ -520,7 +520,33 @@ public:
     }
 };
 
+//Leetcode 141
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
 
+        while(fast != nullptr && fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+whenver we get fast and slow pointer on same index then we can unerstand that their is cycle if nit then by not nay means fast and slow pointer collide in linear linked list
 
 
 
