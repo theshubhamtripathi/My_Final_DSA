@@ -601,7 +601,39 @@ public:
 };
 
 //Leetcode 19
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        //Single pass solution 
+        //this is also the optimal solution in this we are doing nothing extra just making sure we have a fast and a alsow pointer and it goes through n steps then slow one follows it when fast recahes the end sloe.nect will be our answer
 
+        ListNode* fast = head;
+        ListNode* slow = head;
+
+        for(int i=0;i<n;i++){
+            fast = fast->next;
+        }
+        if(fast == nullptr) return head->next; //means head is the thng we have to remove
+        while(fast->next != nullptr){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        ListNode* delnode = slow->next; //it automatically stops where sloe next will points
+        slow->next = slow->next->next;
+        delete(delnode);
+        return head;
+    }
+};
 
 
 
