@@ -702,7 +702,101 @@ public:
 };
 
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 
+
+//Leetcode 61
+class Solution {
+public:
+    /**
+     * HELPER FUNCTION: find_n_node
+     * -----------------------------
+     * Purpose: Traverses the linked list to find and return the k-th node (1-indexed).
+     * 
+     * @param temp Pointer to the starting node of the list/sublist.
+     * @param k The 1-based index of the node we want to retrieve.
+     * @return Pointer to the k-th node, or nullptr if k is larger than the list length.
+     */
+    ListNode* find_n_node(ListNode* temp, int k) {
+        int a = 1; // Counter to keep track of the current node position (1-indexed)
+        
+        while (temp != nullptr) {
+            // If the current position matches the requested index 'k', return this node
+            if (a == k) return temp; 
+            
+            a++;               // Increment the position counter
+            temp = temp->next; // Move to the next node in the list
+        }
+        
+        return temp; // Return nullptr if list ends before reaching k
+    }
+
+    /**
+     * MAIN FUNCTION: rotateRight
+     * --------------------------
+     * Purpose: Rotates a singly-linked list to the right by 'k' places.
+     * 
+     * Core Logic:
+     * 1. Calculate the total length of the list and identify the current tail (last node).
+     * 2. Simplify 'k' using modulo (k = k % len) to avoid unnecessary full-cycle rotations.
+     * 3. Make the linked list circular by connecting the original tail's 'next' pointer to 'head'.
+     * 4. Locate the new tail node, which is at position (len - k) from the start.
+     * 5. Set the new head as (new_tail->next) and break the circle by setting (new_tail->next = nullptr).
+     */
+    ListNode* rotateRight(ListNode* head, int k) {
+        // EDGE CASE 1: Empty list (head == nullptr) OR no rotation requested (k == 0)
+        // In either case, the list remains unchanged.
+        if (head == nullptr || k == 0) return head;
+
+        // STEP 1: Find the length of the list and track the original tail node
+        ListNode* tail = head;
+        int len = 1; // Start with 1 since we begin at head
+        
+        // Loop until 'tail' points to the very last node (where tail->next is nullptr)
+        while (tail->next != nullptr) {
+            len++;
+            tail = tail->next;
+        }
+
+        // EDGE CASE 2: If 'k' is a multiple of list length, rotating returns the same list
+        // Example: Rotating a list of length 5 by k=5, k=10, etc., results in the original list.
+        if (k % len == 0) return head;
+
+        // STEP 2: Optimize 'k'
+        // If k > len, rotating 'k' times is equivalent to rotating (k % len) times.
+        // Example: length = 5, k = 12 --> 12 % 5 = 2 rotations needed.
+        k %= len;
+
+        // STEP 3: Connect tail to head to temporarily create a circular linked list
+        tail->next = head;
+
+        // STEP 4: Find the node that will become the NEW tail of the rotated list
+        // Mathematically, if we shift right by 'k' elements:
+        // - The last 'k' elements move to the front.
+        // - The remaining (len - k) elements stay in the original order at the beginning.
+        // - Therefore, the new end of the list is at 1-based index (len - k).
+        ListNode* lastnode = find_n_node(head, len - k);
+
+        // STEP 5: Reassign the head pointer and break the circle
+        // The new head is the node directly after our new tail
+        head = lastnode->next; 
+
+        // Break the circular connection to restore a standard linear linked list
+        lastnode->next = nullptr;
+
+        // Return the new head of the rotated linked list
+        return head;
+    }
+};
 
 
 
