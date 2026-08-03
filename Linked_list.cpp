@@ -799,6 +799,80 @@ public:
 };
 
 
+leetcode 160 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        unordered_map <ListNode*,int> mp;
+        ListNode* temp = headA;
+        while(temp != nullptr){
+            mp[temp] = 1;
+            temp = temp->next;
+        }
+        temp = headB;
+        while(temp != nullptr){
+            if(mp.find(temp) != mp.end()){// just go till the end of the if not find return null else return the excat pointer 
+                return temp;
+            }
+            temp = temp->next;
+        }
+        return NULL;
+    }
+};
+
+better using set 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        // unordered_map <ListNode*,int> mp;
+        // ListNode* temp = headA;
+        // while(temp != nullptr){
+        //     mp[temp] = 1;
+        //     temp = temp->next;
+        // }
+        // temp = headB;
+        // while(temp != nullptr){
+        //     if(mp.find(temp) != mp.end()){// just go till the end of the if not find return null else return the excat pointer 
+        //         return temp;
+        //     }
+        //     temp = temp->next;
+        // }
+        // return NULL;
+
+        unordered_set<ListNode*> setl;
+        ListNode* temp = headA;
+        while(temp != nullptr){
+            setl.insert(temp);
+            temp = temp->next;
+        }
+        temp = headB;
+        while(temp != nullptr){
+            if(setl.count(temp)){
+                return temp;
+            }
+            temp = temp->next;
+        }
+        return NULL;
+    }
+};
+
+Leetcode 234
 
 
 
