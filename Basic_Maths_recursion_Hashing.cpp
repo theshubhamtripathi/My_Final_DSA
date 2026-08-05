@@ -553,6 +553,34 @@
 // }
 
 
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> r;
+        int maxf = INT_MIN;
+
+        unordered_map<int,int> mp;
+        for(auto it : nums){
+            mp[it]++;
+        }
+
+        while(k>0){
+            int maxf = INT_MIN;
+            int maxe = 0;
+
+            for(auto it : mp){
+                if(maxf<it.second){
+                    maxf = it.second;
+                    maxe = it.first;
+                }
+            }
+            r.push_back(maxe);
+            mp.erase(maxe); //jisse dobara na push ho
+            k--;
+        }
+        return r;
+    }
+};
 
 
 
