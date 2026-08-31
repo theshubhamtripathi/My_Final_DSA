@@ -47,3 +47,41 @@ public:
 
 
 Leetcode 31
+
+
+Leetcode 53
+//using n^2 kind of a sliding window 
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int maxsum = nums[0];
+        for(int i=0;i<n;i++){
+            int sum = 0;
+            for(int j=i;j<n;j++){
+                sum += nums[j];
+                maxsum = max(maxsum,sum);
+            }
+        }
+        return maxsum;
+    }
+};
+
+//using Kdane optimal solution 
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int maxsum = nums[0];
+        int sum = 0;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+            maxsum = max(maxsum,sum);
+
+            if(sum < 0){ //The specific purpose of if (sum < 0) { sum = 0; } is to discard a negative running sum so it does not reduce the sum of future subarrays.
+                sum = 0;
+            }
+        }
+        return maxsum;
+    }
+};
