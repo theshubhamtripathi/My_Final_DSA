@@ -47,7 +47,31 @@ public:
 
 
 Leetcode 31
+//So basically what we did in this question was just first we created or wanted a breaking point after that if we founded a breaking point we just finded the number lesser than it strictly less then we just swap the 2 and then we did the reverse from i+1 and we are done.
+void nextPermutation(vector<int>& nums) {
 
+    int n = nums.size();
+
+    // so from right we are checking whether we are getting any breaking point or not
+    int i = n - 2;
+
+    while(i >= 0 && nums[i] >= nums[i + 1]) /*we are finding the breakpoint*/ {
+        i--;
+    }
+
+    if(i >= 0) {
+
+        int j = n - 1;
+
+        while(nums[j] <= nums[i]) {
+            j--;
+        }
+
+        swap(nums[i], nums[j]);
+    }
+
+    reverse(nums.begin() + i + 1, nums.end());
+}
 
 Leetcode 53
 //using n^2 kind of a sliding window 
@@ -85,3 +109,60 @@ public:
         return maxsum;
     }
 };
+
+Leetcode 121
+//Brute force calculating every type of pairs of profits using n^2 complexity
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        int maxp = 0;
+        for(int i=0;i<n;i++){
+            for(int j =i+1;j<n;j++){
+                int profit = prices[j]-prices[i];
+                maxp = max(maxp,profit);
+            }
+        }
+        return maxp;
+    }
+};
+
+Leetcode 287
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        //self tried approcah what we did we just used whta given in the question nothing much else 
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(nums[i] == nums[j]){
+                    return nums[j];
+                    break;
+                }
+            }
+        }
+        return -1;
+    }
+};
+
+//ye map se haieasy and fast 
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        unordered_map<int,int> mp;
+        for(auto it:nums){
+            mp[it]++;
+        }
+        for(auto it : mp){
+            if(it.second > 1){
+                return it.first;
+            }
+        }
+        return -1;
+    }
+};
+
+
+//we can do also by sorting as well 
+
+//optimal by using slow and fast pointer quite tough baad me seekh lena 
