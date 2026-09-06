@@ -184,3 +184,46 @@ public:
     }
 };
 
+
+Leetcode 56
+
+//so in this question we did nothing very extreme just we first sorted the first array and then we we checked the first interval last element if it is less then the first one they will make a overlap
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        int n = intervals.size();
+        vector<vector<int>> ans;
+        sort(intervals.begin(),intervals.end());
+
+        //till here we sorted the main array
+
+        for(int i=0;i<n;i++){
+            if(ans.empty() || intervals[i][0]>ans.back()[1]){
+                ans.push_back(intervals[i]);
+            }
+            else{
+                ans.back()[1] = max(ans.back()[1],intervals[i][1]);
+            }
+        }
+        return ans;
+    }
+};
+
+
+Leetcode 229
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        vector<int> a;
+        unordered_map<int,int> mp;
+        for(auto it : nums){
+            mp[it] ++;
+        }
+        for(auto it : mp){
+            if(it.second > nums.size()/3){
+                a.push_back(it.first);
+            }
+        }
+        return a;
+    }
+};
