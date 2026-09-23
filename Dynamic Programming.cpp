@@ -417,5 +417,44 @@ public:
     }
 };
 
+//basically in this question just keep on chekcing tsake and leave 
+//we need dp to solve overlapping subprblems and in a optimal way to found a global optima; solution
 
-  
+//0-1 Knapsack
+here greedy fails because there is no uniformity so we have to apply recursion any how and trying out all possible ways so we will implment dp here.
+here again we will express evevyrhting in the form of weight and indexes then explore all the possibilities using pick and non pick and then select the highest or the max value between them 
+
+apart from this when we are looking for take condition we must look thorugh them if condiiton and in those condition we must implement those base cases.
+
+class Solution {
+  public:
+    int solve(int idx, vector<int> &val, vector<int> &wt, int W, vector<vector<int>> &dp) {
+        // Base case: out of items or no capacity left
+        if (idx >= val.size() || W == 0) {
+            return 0;
+        }
+
+        // Return memoized result if available
+        if (dp[idx][W] != -1) return dp[idx][W];
+
+        int take = 0;
+        if (W >= wt[idx]) {
+            take = val[idx] + solve(idx + 1, val, wt, W - wt[idx], dp);
+        }
+
+        int skip = solve(idx + 1, val, wt, W, dp);
+
+        // Store and return maximum
+        return dp[idx][W] = max(take, skip);
+    }
+
+    int knapsack(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();
+        // dp grid for state (idx, W)
+        vector<vector<int>> dp(n, vector<int>(W + 1, -1));
+        return solve(0, val, wt, W, dp);
+    }
+};
+
+//Fractional knapsack 
+using pair we cna solve that using a comparator sorting function 
