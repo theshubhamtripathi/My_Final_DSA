@@ -378,4 +378,44 @@ public:
 recursion plus memo 
 
 
+//Leetcode 300
+Longest increasing subsequnce we make a tree diagram take or leave 
+In subsequnce porblems the tree diagram we make by using the concept of take and leave 
+
+class Solution {
+public:
+    int solve(vector<int> &nums, int i, int p, vector<vector<int>> &dp) {
+        // Base case: processed all elements
+        if (i >= nums.size()) {
+            return 0;
+        }
+
+        // Coordinate shift: p = -1 maps to index 0 in DP table
+        if (dp[i][p + 1] != -1) {
+            return dp[i][p + 1];
+        }
+
+        // Choice 1: Skip the current element (move to i + 1, keep same previous index p)
+        int skip = solve(nums, i + 1, p, dp);
+
+        // Choice 2: Take the current element (ONLY if valid)
+        int take = 0;
+        if (p == -1 || nums[i] > nums[p]) {
+            // New previous index becomes 'i'
+            take = 1 + solve(nums, i + 1, i, dp);
+        }
+
+        // Save and return using p + 1 offset
+        return dp[i][p + 1] = max(take, skip);
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        // Matrix size: n rows for index 'i', (n + 1) columns for previous index 'p' (-1 to n-1)
+        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+        return solve(nums, 0, -1, dp);
+    }
+};
+
+
   
