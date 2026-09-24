@@ -583,5 +583,35 @@ public:
 };
 
 
+//Dutch National Flag Algo.
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        //using dutch national flag algo
+        //we will assign 3 varibale i j and k 
+        //int his question we will have 4 regions first one in that from to low-1 will 0 then from low to mid -1 will be ones and then the unsorted part will come then finally we have the part in which from to n-1 we will have the high parts 
 
+        //isme apan ko 3 hi numbe rke sayth kehnlna hai so uske hi according humlob apne if conditions de denge.
+
+        //mainly humara mid hi move karega.
+        int n = nums.size();
+        int low = 0;
+        int mid = 0;
+        int high = n-1;
+        while(mid <= high){
+            if(nums[mid] == 0){
+                swap(nums[low],nums[mid]);
+                low++;
+                mid++;
+            }
+            else if(nums[mid] == 1){
+                mid++;
+            }
+            else{
+                swap(nums[mid],nums[high]);
+                high--;
+            }
+        }
+    }
+};
 
