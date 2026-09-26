@@ -187,7 +187,7 @@ public:
     }
 };
 
-//More btter explanantion written 
+//More better explanantion written 
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -230,3 +230,69 @@ public:
         return ans;
     }
 };
+
+Leetcode 49 Group Anagrams
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        int n = strs.size();
+        unordered_map<string, vector<string>> mp; // Stores: sorted_string -> list of original strings
+        
+        for (int i = 0; i < n; i++) {
+            string temp = strs[i];
+            
+            // 1. Sort the characters of 'temp' to create the unique key
+            sort(temp.begin(), temp.end());
+            
+            // 2. Group the original string under its sorted key
+            mp[temp].push_back(strs[i]);
+        }
+        
+        // 3. Collect all grouped vectors from the map
+        vector<vector<string>> ans;
+        for (auto it : mp) {
+            ans.push_back(it.second);
+        }
+        
+        return ans;
+    }
+};
+
+Leetcode 3 Longest Substring Without Repeating Characters
+//Whenever you see a problem like substring and longest start thinking about sliding window and 2 pointer 
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.size();
+        unordered_map<char, int> mp; // Stores: character -> last seen index
+        
+        int left = 0;
+        int maxLen = 0;
+        
+        for (int right = 0; right < n; right++) {
+            char ch = s[right];
+            
+            // If character was seen inside the current window, jump left pointer
+            if (mp.find(ch) != mp.end()) {
+                left = max(left, mp[ch] + 1);
+            }
+            
+            // Store/update the last seen index of current character
+            mp[ch] = right;
+            
+            // Calculate length of current window
+            maxLen = max(maxLen, right - left + 1);
+        }
+        
+        return maxLen;
+    }
+};
+
+Pointer Structure: A Singly Linked List (SLL) node stores data and one pointer (next), allowing unidirectional traversal. A Doubly Linked List (DLL) node stores data and two pointers (next and prev), allowing bidirectional traversal.
+Memory Overhead: SLL uses less memory per node (1 pointer). DLL requires extra memory per node to store the prev pointer (2 pointers).
+Deletion & Predecessor Lookup: Deleting a given target node reference or inserting before it takes $O(1)$ time in DLL (via node->prev), but $O(N)$ time in SLL because SLL must traverse from the head to find the preceding node.
+Use Cases: SLL is ideal when memory is constrained and access is purely forward (Stacks, simple Queues). DLL is ideal for fast middle deletions and backward navigation (LRU Cache, Deque, Browser Back/Forward history).
+
+Leetcode 142. Linked List Cycle II
+
