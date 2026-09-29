@@ -295,4 +295,197 @@ Deletion & Predecessor Lookup: Deleting a given target node reference or inserti
 Use Cases: SLL is ideal when memory is constrained and access is purely forward (Stacks, simple Queues). DLL is ideal for fast middle deletions and backward navigation (LRU Cache, Deque, Browser Back/Forward history).
 
 Leetcode 142. Linked List Cycle II
+In this question we are looking for basically, first we will check if there is a loop by totortoise and hare we will do this then we will check if there is loop then we will again make a p pointer and if p == slow then return the p
+else slow is not rqual to fast return null.
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        
+        if(head == NULL || head->next == NULL) return NULL; //Means if my linked list is empty or the it onyl contains one element only.
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+        //intialise both pointer on the head
+
+        //Now move fast and slow pointer of the pointer collide then there will be cycle else no
+
+        //to see if fast dont go beyond the limit
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){ //means cycle present
+                break;
+            }
+        }
+
+        if(slow != fast){ //if no cycle
+            return NULL;
+        }
+
+        ListNode* p = head;
+        while(slow != p){
+            p = p->next;
+            slow = slow->next;
+        }
+        return p; //when p == slow
+    }
+};
+
+Leetcode 206 and 21
+
+Reverse a Linked List 206
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head == NULL || head->next == NULL){
+            return head;
+        }
+
+        ListNode* last = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return last;
+    }
+};
+
+Merge 2 sorted list Leetcode 21
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if(list1 == NULL){
+            return list2;
+        }
+        if(list2 == NULL){
+            return list1;
+        }
+
+        ListNode* r;
+        if(list1->val < list2->val){
+            r = list1;
+            r->next = mergeTwoLists(list1->next,list2);
+        }
+        else{
+            r = list2;
+            r->next = mergeTwoLists(list1,list2->next);
+        }
+        return r;
+    }
+};
+
+Leetcode 20 Valid parenthesis
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+
+        for (int i = 0; i < s.size(); i++) {
+            // Rule 1: Push opening brackets
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+                st.push(s[i]);
+            } 
+            // Rule 2: Handle closing brackets
+            else {
+                // Check A: If stack is empty when seeing a closing bracket, it's invalid
+                if (st.empty()) return false;
+
+                // Check B: Match with the top of stack
+                if (s[i] == ')' && st.top() == '(') {
+                    st.pop();
+                } else if (s[i] == '}' && st.top() == '{') {
+                    st.pop();
+                } else if (s[i] == ']' && st.top() == '[') {
+                    st.pop();
+                } else {
+                    // Mismatched bracket type (e.g., top is '(', current is ']')
+                    return false; 
+                }
+            }
+        }
+
+        // Rule 3: Stack must be empty at the end
+        return st.empty();
+    }
+};
+
+//How to implement a stack(LIFO) using queue(FIFO) Leetcode 225
+//In this we will follow a 3 step structure like first we will make sure 2 queues and in Q1 we will make that our main container from where we will return our ans we have to basically 
+//make use of Q2 as a helper which helps us in maintaing Q1 and we will do that by using a 3 step method of 1.) we will copy every data of Q1 to Q2 then we will push that data to q1 then we will copy back evevyrhting again from q2
+// to q1 and we will repeat the process.
+class MyStack {
+public:
+    MyStack() {
+        
+    }
+    //Created 2 queues
+    queue<int> q1;
+    queue<int> q2;
+
+    void push(int x) {
+        //In this loop we basically did we copy evevrything from q1 and pasted in q2 then we we push that specific element to q1 and then again copy everyhting from q2 to q1
+        while(!q1.empty()){
+            q2.push(q1.front());
+            q1.pop();
+        }
+
+        q1.push(x);
+
+        while(!q2.empty()){
+            q1.push(q2.front());
+            q2.pop();
+        }
+    }
+    
+    int pop() {
+        int ans  = q1.front();
+        q1.pop();
+        return ans;
+    }
+    
+    int top() {
+        return q1.front();
+    }
+    
+    bool empty() {
+        return q1.empty();
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack* obj = new MyStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * bool param_4 = obj->empty();
+ */
+
+//Implement queue using stack Leetcode 
+
 
