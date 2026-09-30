@@ -486,6 +486,183 @@ public:
  * bool param_4 = obj->empty();
  */
 
-//Implement queue using stack Leetcode 
+//Implement queue using stack Leetcode 232
+These both questions are very similar as they both follow the similar 3 step method of copy pasting like we did previously 
+
+class MyQueue {
+public:
+
+    stack<int> st1;
+    stack<int> st2;
+    //st1 will be our main and st2 will be our helper
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        while(!st1.empty()){
+            st2.push(st1.top());
+            st1.pop();
+        }
+
+        st1.push(x);
+
+        while(!st2.empty()){
+            st1.push(st2.top());
+            st2.pop();
+        }
+    }
+    
+    int pop() {
+        int ans = st1.top();
+        st1.pop();
+        return ans;
+    }
+    
+    int peek() {
+        return st1.top();
+    }
+    
+    bool empty() {
+        return st1.empty();
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
+
+//These both are very similar and imp as well 
+
+===================================================================
+                  INFIX, PREFIX & POSTFIX CHEAT SHEET
+===================================================================
+
+1. DEFINITIONS
+   • Infix   : Operator INSIDE operands     --> (A + B)  [Human standard]
+   • Prefix  : Operator BEFORE operands     --> + A B    [Polish notation]
+   • Postfix : Operator AFTER operands      --> A B +    [Reverse Polish]
+
+2. WHY PREFIX & POSTFIX?
+   • No parentheses needed to define order of operations.
+   • Easy for computers to evaluate using a STACK data structure in O(N) time.
+
+3. PAPER CONVERSION METHOD (Bracket-and-Move)
+   Step 1: Fully parenthesize expression by priority.
+   Step 2: Move operators inside their brackets.
+           - For Postfix: Move to RIGHT of closing bracket.
+           - For Prefix : Move to LEFT of opening bracket.
+   Step 3: Remove all parentheses.
+
+4. QUICK EXAMPLES
+   -----------------------------------------------------------------
+   Infix           | Postfix (Move Right) | Prefix (Move Left)
+   -----------------------------------------------------------------
+   A + B           | A B +                | + A B
+   A + B * C       | A B C * +            | + A * B C
+   (A + B) * C     | A B + C *            | * + A B C
+   A * B + C / D   | A B * C D / +        | + * A B / C D
+   -----------------------------------------------------------------
+
+5. STACK RULE FOR INFIX TO POSTFIX
+   • Operands  --> Output
+   • '('       --> Push to Stack
+   • ')'       --> Pop stack to output until '('
+   • Operator  --> Pop higher/equal precedence operators from stack,
+                   then push current operator.
+===================================================================
+
+
+Leetcode 33 search in a rotated sorted array (Binary search)
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            // 1. Found target?
+            if (nums[mid] == target) return mid;
+
+            // 2. Is the LEFT half sorted?
+            if (nums[low] <= nums[mid]) {
+                // Check if target lies inside the left sorted range
+                if (nums[low] <= target && target < nums[mid]) {
+                    high = mid - 1; // Target is in left half
+                } else {
+                    low = mid + 1;  // Target is in right half
+                }
+            } 
+            // 3. Otherwise, the RIGHT half MUST be sorted!
+            else {
+                // Check if target lies inside the right sorted range
+                if (nums[mid] < target && target <= nums[high]) {
+                    low = mid + 1;  // Target is in right half
+                } else {
+                    high = mid - 1; // Target is in left half
+                }
+            }
+        }
+
+        return -1; // Target not found
+    }
+};
+
+// Kdane algorithm Leetcode 53
+we can also solve this question using our normal brute force approach one loop form i to another loop from i=j i am directly writing code for the most optimal one that is kdanes algorithm 
+The main intuution of kdanes is to find sum of 2 numbers that is normla plus minus 
+if evver subarray sum reaches negative then put that to zero (initialise with 0 when sum reaches 0)
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        // Tracks the sum of the current subarray we are expanding
+        int currsum = 0;
+        
+        // Tracks the overall maximum sum found so far across all valid subarrays.
+        // Initialized to INT_MIN so it works correctly even if all numbers are negative.
+        int maxsum = INT_MIN;
+
+        // Traverse through each element in the array
+        for (int i = 0; i < nums.size(); i++) {
+            // Step 1: Add the current element to our running sum
+            currsum += nums[i];
+
+            // Step 2: Update the maximum sum seen so far.
+            // MUST happen before resetting currsum so that all-negative arrays
+            // capture the actual single maximum negative value instead of returning 0.
+            maxsum = max(maxsum, currsum);
+
+            // Step 3: If the running sum drops below 0, reset it back to 0.
+            // Intuition: A negative prefix will only reduce the sum of any 
+            // future subarray, so it's better to discard it and start fresh.
+            if (currsum < 0) {
+                currsum = 0;
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxsum;
+    }
+};
+
+Leetcode 560
+
 
 
