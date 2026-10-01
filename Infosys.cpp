@@ -662,7 +662,71 @@ public:
     }
 };
 
-Leetcode 560
+Leetcode 560 Subarray sum equals k
+//brute forces 
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int c = 0;
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            //You have to reset the sum to check all the arrays
+            int sum = 0;
+            for(int j=i;j<n;j++){
+                sum += nums[j];
+                if(sum == k){
+                    c++;
+                }
+            }
+        }
+        return c;
+    }
+};
 
+//Optimal for this is unordered map and prefix sum
+basically we use a prefic sum here that is the sum of all indexes of the array suppose the sum(i,j){sum of all the elements between i and j index} = sum[j] - sum[i-1] then you will get the sum of that sub part
+#include <vector>
+#include <unordered_map>
 
+using namespace std;
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        // Step 1: Create a hash map to store <prefix_sum, frequency>
+        // Key   = a running sum value we have seen so far
+        // Value = how many times that running sum has occurred
+        unordered_map<int, int> mp;
+
+        // Base Case: A prefix sum of 0 has occurred ONCE before processing any elements.
+        // Why? If sum equals k directly from index 0 (e.g., nums = [3], k = 3),
+        // then (sum - k) = (3 - 3) = 0. We need mp[0] to be 1 so that count increments!
+        mp[0] = 1;
+
+        int sum = 0;   // Stores the running prefix sum from index 0 to i
+        int count = 0; // Stores the total count of valid subarrays found
+
+        // Step 2: Iterate through the array
+        for (int i = 0; i < nums.size(); i++) {
+            // Add current element to our running sum
+            sum += nums[i];
+
+            // Core Formula: If (sum - k) exists in our map, it means there exists
+            // a previous prefix sum such that: (Current Sum) - (Old Prefix Sum) = k.
+            int diff = sum - k;
+
+            // Check if this required old prefix sum exists in our map
+            if (mp.find(diff) != mp.end()) {
+                // Add its frequency to our answer (there might be multiple starting points!)
+                count += mp[diff];
+            }
+
+            // Step 3: Record the current running sum into the map for FUTURE elements to use
+            mp[sum]++;
+        }
+
+        // Return total count of subarrays that sum up to k
+        return count;
+    }
+};
 
