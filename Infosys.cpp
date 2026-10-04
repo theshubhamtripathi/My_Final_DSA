@@ -749,3 +749,68 @@ public:
         return ans;
     }
 };
+
+
+Leetcode 78 Subsets
+//Kabhi bhi jab jeewan me option dikhayi de toh recursion ke taraf jaa (take or leave approach)
+//For typical dp and recursion question solve using tree diagram this makes the question more understanding and easy 
+
+class Solution {
+public:
+    vector<vector<int>> result; //taking this as global so it can be used in both the functions 
+    void solve(vector<int> &nums,vector<int> &temp,int i){
+        if(i >= nums.size()){
+            result.push_back(temp);
+            return;
+        }
+
+        //take 
+        temp.push_back(nums[i]);
+        solve(nums,temp,i+1);
+
+        //dont take
+        temp.pop_back();
+        solve(nums,temp,i+1);
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> temp;
+        solve(nums,temp,0);
+        return result;
+    }
+};
+
+Leetcode 90 Subsets ||
+class Solution {
+public:
+    //Like in this question we have duplicates as well so we have to remove the duplicates as well so here we will use a while loop as well to remove the duplicates
+    void solve(int i,vector<int>& nums,vector<int>& temp,vector<vector<int>>& result){
+        if(i >= nums.size()){
+            result.push_back(temp);
+            return;
+        }
+
+        //take
+        temp.push_back(nums[i]);
+        solve(i+1,nums,temp,result);
+
+        // 2. Leave (exclude nums[i])
+        // Skip all duplicate occurrences of nums[i] so we don't form identical subsets
+        temp.pop_back();
+        while (i + 1 < nums.size() && nums[i] == nums[i + 1]) {
+            i++;
+        }
+        
+        solve(i + 1, nums, temp, result);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> result; //2d vector to save all the answers
+        vector<int> temp;
+        sort(nums.begin(),nums.end()); //sort so that the adjacent elements stays together.......
+
+        solve(0,nums,temp,result);
+        return result;
+    }
+};
+
+
