@@ -813,4 +813,33 @@ public:
     }
 };
 
+Leetcode 518 Coin exchnage ||
+class Solution {
+public:
+
+    int solve(int i,int amount,vector<int>& coins,vector<vector<int>>& dp){
+        if(amount == 0) return 1;  //means we found one ans
+        if(amount < 0 || i >= coins.size()) return 0;  //out of bound ho gaya no answer found
+        if(dp[i][amount] != -1){
+            return dp[i][amount];
+        }
+        int take = solve(i,amount-coins[i],coins,dp); //i isliye kyuki same coin le sakte hai dobara
+
+        int skip = solve(i+1,amount,coins,dp);
+        return dp[i][amount] = take + skip;
+    }
+
+    int change(int amount, vector<int>& coins) {
+        //as we can see here 2 parameters are chnagin one is amount and another one is index so we have to a 2d dp to memoizxe it 
+        vector<vector<int>> dp(coins.size(),vector<int>(amount + 1 , -1));  //vector<vector<int>> dp( rows , vector<int>(cols, initial_value) );
+        return solve(0,amount,coins,dp);
+    }
+};
+
+
+Leetcode 322 Coin exchnage
+//Greedy fails here so we use a dp on subsequnces approach 
+// so we have to use try all the combos and take the combos that have the min coin 
+
+//if you have questions like infinite supply and multiple uses take keep the index same 
 
