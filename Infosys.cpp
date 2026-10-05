@@ -839,7 +839,31 @@ public:
 
 Leetcode 322 Coin exchnage
 //Greedy fails here so we use a dp on subsequnces approach 
-// so we have to use try all the combos and take the combos that have the min coin 
+// so we have to use try all the combos and take the combos that have the min coin not only the local optimal solution 
 
 //if you have questions like infinite supply and multiple uses take keep the index same 
+class Solution {
+public:
+    int solve(int i,vector<int> &coins,int amount,vector<vector<int>> &dp){
+        if(amount == 0) return 0; //0 ho gayi hai total value
+        if(amount < 0 || i >= coins.size()) return 1e9; //it represents in valid path
+        if(dp[i][amount] != -1){
+            return dp[i][amount];
+        }
+        int take = 1 + solve(i,coins,amount-coins[i],dp); //i wahi rahega beacuse we can take infinite coins and same coin again and again
+        int skip = solve(i+1,coins,amount,dp);
+
+        return dp[i][amount] = min(take,skip);
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        vector<vector<int>> dp(coins.size(),vector<int>(amount + 1,-1));
+
+        int ans = solve(0,coins,amount,dp);
+        if(ans == 1e9){
+            return -1;
+        }
+        return ans;
+    }
+};
+
 
