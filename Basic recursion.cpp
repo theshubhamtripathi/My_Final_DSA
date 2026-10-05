@@ -298,8 +298,10 @@ int main(){
 
 TC : O(2^n) exponential 
 
- //by recursion we have to find total number of subsequences
- Pick or Not pick vvvimp concept 
+
+// IMP The main difference is that a subsequence must preserve the relative order of elements from the original sequence, whereas a subset is an unordered collection of elements where order does not matter.
+//by recursion we have to find total number of subsequences
+*Pick* or Not pick vvvimp concept 
 #include <bits/stdc++.h>
 using namespace std;
 
