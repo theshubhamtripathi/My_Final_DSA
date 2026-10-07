@@ -897,6 +897,38 @@ public:
 };
 
 
-Trappin rain water 
+Trappin rain water (using stack and array)
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        if (n == 0) return 0;
+
+        // Arrays to store maximum height to the left and right of every index
+        vector<int> leftMax(n);
+        vector<int> rightMax(n);
+
+        // 1. Fill leftMax array (Prefix Max)
+        leftMax[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = max(leftMax[i - 1], height[i]);
+        }
+
+        // 2. Fill rightMax array (Suffix Max)
+        rightMax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = max(rightMax[i + 1], height[i]);
+        }
+
+        // 3. Calculate trapped water at each bar
+        int sum = 0; // measure ki hamare pass total kitna paani hai
+        for (int i = 0; i < n; i++) {
+            int measure_at_i = min(leftMax[i], rightMax[i]) - height[i];
+            sum += measure_at_i;
+        }
+
+        return sum;
+    }
+};
 
 
