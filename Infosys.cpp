@@ -867,4 +867,36 @@ public:
 };
 
 Knight Travels
+class Solution {
+public:
+    bool solve(vector<vector<int>> &grid,int r,int c,int n,int expV){
+        if(r<0 || c<0 || r>=n || c>=n || grid[r][c] != expV){
+            return false;  //grid[r][c] != expV this line is basically checking if we are going to all the steps one after another or not
+        }
+        if(expV == n*n - 1){
+            return true;  //means it reached all the possible cases 
+        }
+
+        //All the 8 possible moves of knight main cheez yahi this iss code me total 8 steps ko count karna 
+
+        int ans1 = solve(grid,r + 2,c-1,n,expV+1);
+        int ans2 = solve(grid,r + 2,c+1,n,expV+1);
+        int ans3 = solve(grid,r - 2,c-1,n,expV+1);
+        int ans4 = solve(grid,r - 2,c+1,n,expV+1);
+        int ans5 = solve(grid,r + 1,c-2,n,expV+1);
+        int ans6 = solve(grid,r - 1,c-2,n,expV+1);
+        int ans7 = solve(grid,r + 1,c+2,n,expV+1);
+        int ans8 = solve(grid,r - 1,c+2,n,expV+1);
+
+        return ans1||ans2||ans3||ans4||ans5||ans6||ans7||ans8;
+
+    }
+    bool checkValidGrid(vector<vector<int>>& grid) {
+        return solve(grid,0,0,grid.size(),0);
+    }
+};
+
+
+Trappin rain water 
+
 
