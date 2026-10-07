@@ -901,6 +901,7 @@ Trappin rain water (using stack and array)
 class Solution {
 public:
     int trap(vector<int>& height) {
+        //By normal way using rightmax and leftmax
         int n = height.size();
         if (n == 0) return 0;
 
@@ -928,6 +929,10 @@ public:
         }
 
         return sum;
+
+
+        //By using monotonic stack
+        
     }
 };
 
