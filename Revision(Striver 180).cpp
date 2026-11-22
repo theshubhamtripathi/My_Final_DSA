@@ -99,3 +99,5 @@ public:
 };
 
 LC 229
+//There is one small mathmatical intepretation i am getting suppose we have to n/x total majority elements like in question if it is given if any number is present more than n/3 times then it is majority elemnt so max majority element possible in that case is 2 similarly if n/4 then 3 n/2 then 1.
+
