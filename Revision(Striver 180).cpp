@@ -1,4 +1,4 @@
-LC 169 
+ LC 169 
   //Brute Sorting
 class Solution {
 public:
