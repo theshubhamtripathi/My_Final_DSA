@@ -146,5 +146,23 @@ public:
     }
 };
 
+//Bonus 
+Common Wealth Bank of Australia (OA question) suppose a n is given for example 2 and a 2d matrix is given 1 2 1st row and 2 3 2nd row so we have to find the min and max and then find the difference in between eg 1+2 = 3 absolute min 2 +3 = 5 abs difference between is 5-3 = 2
+//My intutuion is sort indidvidual rows and coloums and then make a maxi add all the max elements and then make  a min and add all the minimun elemets 
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int maxi = 0;
+    int mini = 0;
+    vector<vector<int>> arr = {{1,2,3},{1,2,3},{1,2,3}};
+    for(auto &it : arr){
+        sort(it.begin(),it.end());
+        maxi += it[arr.size() - 1];
+        mini += it[0];
+    }
+    cout<<maxi - mini;
+    return 0;
+}
 
 LC 75
+
